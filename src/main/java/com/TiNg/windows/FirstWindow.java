@@ -9,8 +9,8 @@ public class FirstWindow extends Stage {
     AnchorPane anchorPane = new AnchorPane();
     Scene scene = new Scene(anchorPane);
 
-    int windowWidth = 800;
-    int windowHeight = 500;
+    int windowWidth = 1200;
+    int windowHeight = 700;
 
     public FirstWindow() {
         setTitle("New_ModbusTool -ver0.0.0");
@@ -19,8 +19,9 @@ public class FirstWindow extends Stage {
         anchorPane.setStyle("-fx-background-color:#FFB6C1");
         setScene(scene);
 
+        COMConnect comConnect = new COMConnect(windowWidth);
+        anchorPane.getChildren().add(comConnect);
+        AnchorPane.setBottomAnchor(comConnect,0.0);
         show();
-
-        anchorPane.getChildren().add(new COMConnect());
     }
 }
