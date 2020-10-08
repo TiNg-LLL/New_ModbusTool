@@ -1,7 +1,23 @@
 package com.TiNg.mainLauncher;
 
-public class MainLauncher {
-    public static void main(String[] args) {
-        System.out.println("hello");
+import com.TiNg.windows.FirstWindow;
+import javafx.application.Application;
+import javafx.stage.Stage;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class MainLauncher extends Application {
+    SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        FirstWindow firstWindow = new FirstWindow();
+        System.out.println(df.format(new Date()) + " " + "主窗口已生成");
+    }
+
+    @Override
+    public void stop() throws Exception {
+        System.out.println(df.format(new Date()) + " " + "主窗口已退出");
     }
 }
