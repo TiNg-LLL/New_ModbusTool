@@ -16,14 +16,14 @@ public class Modbus {
     ModbusMaster mm = null;
 
     //连接
-    public void ModbusConnect(String comName, Integer baudrate, Integer dataBits, Integer stopBits, String doubleEven) {
+    public void ModbusConnect(String comName, Integer baudrate, Integer dataBits, Integer stopBits, String EvenODD) throws Exception {
         SerialUtils.setSerialPortFactory(new SerialPortFactoryJSerialComm());
         com.intelligt.modbus.jlibmodbus.Modbus.setLogLevel(com.intelligt.modbus.jlibmodbus.Modbus.LogLevel.LEVEL_DEBUG);
         sp.setDevice(comName);
         sp.setBaudRate(com.intelligt.modbus.jlibmodbus.serial.SerialPort.BaudRate.getBaudRate(baudrate));
         sp.setDataBits(dataBits);
         sp.setStopBits(stopBits);
-        switch (doubleEven) {
+        switch (EvenODD) {
             case "奇":
                 sp.setParity(SerialPort.Parity.ODD);
                 break;

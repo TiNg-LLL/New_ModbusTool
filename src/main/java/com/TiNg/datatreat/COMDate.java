@@ -2,7 +2,7 @@ package com.TiNg.datatreat;
 
 import com.fazecast.jSerialComm.SerialPort;
 import javafx.collections.FXCollections;
-import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -28,9 +28,7 @@ public class COMDate {
         }
     }
 
-    public void flashCOMDate(ChoiceBox<String> choiceBox) {
-
-
+    public void flashCOMDate(ComboBox<String> choiceBox) {
         String string = choiceBox.getValue();
         list.clear();
         SerialPort[] portNames = SerialPort.getCommPorts();
@@ -38,14 +36,29 @@ public class COMDate {
             list.add(portNames[i].getSystemPortName());
         }
         Collections.sort(list);
-        for (int i = 0; i < portNames.length; i++) {
-            choiceBox.setItems(FXCollections.observableArrayList(list));
-            System.out.println(list.get(i));
-        }
+        choiceBox.setItems(FXCollections.observableArrayList(list));
+
         if (string == null) {
-            choiceBox.setValue(properties.getProperty("COMDefault"));
+            for (int i = 0; i < portNames.length; i++) {  //判断默认COM端口选择的端口值在系统中是否存在 存在则设置
+                if (list.get(i).equals(properties.getProperty("COMDefault"))) {
+                    choiceBox.setValue(properties.getProperty("COMDefault"));
+                }
+            }
+            if (choiceBox.getValue() == null) {
+                choiceBox.setValue(list.get(0));
+            }
         } else {
-            choiceBox.setValue(string);
+            for (int i = 0; i < portNames.length; i++) {
+                if (list.get(i).equals(string)) {
+                    choiceBox.setValue(string);
+                } else {
+                    choiceBox.setValue(list.get(0));
+                }
+            }
+        }
+
+        for (int i = 0; i < portNames.length; i++) {
+            System.out.println(list.get(i));
         }
     }
 }
