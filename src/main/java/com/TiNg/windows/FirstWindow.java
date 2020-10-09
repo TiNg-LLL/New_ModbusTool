@@ -16,7 +16,7 @@ public class FirstWindow extends Stage {
         setTitle("New_ModbusTool -ver0.0.0");
         setWidth(windowWidth);
         setHeight(windowHeight);
-        anchorPane.setStyle("-fx-background-color:#FFB6C1");
+        anchorPane.setStyle("-fx-background-color:#a5a3a3");
         setScene(scene);
 
         COMConnect comConnect = new COMConnect(windowWidth);

@@ -104,7 +104,7 @@ public class COMConnect extends HBox {
         button.setText("连接");  //连接按钮
         button.setFont(Font.font("微软雅体"));
         button.setPrefSize(80.0, 5.0);
-        button.setStyle("-fx-font-weight:bold;" + "-fx-background-color: #07b800");
+        button.setStyle("-fx-font-weight:bold;" + "-fx-background-color: #8dd249");
         button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -133,7 +133,8 @@ public class COMConnect extends HBox {
                         comboBoxEvenODD.setDisable(true);
                         button.setText("断开");
                         button.setStyle("-fx-font-weight:bold;" + "-fx-background-color: #d2d2d2");
-                        setStyle("-fx-background-color: linear-gradient(to right,#d2d2d2,#07b800);");
+                        //setStyle("-fx-background-color: linear-gradient(to right,#d2d2d2,#07b800);");
+                        setStyle("-fx-background-color:#8dd249");
                     }
                 } else {
                     System.out.println("COM端口已断开");
@@ -143,7 +144,7 @@ public class COMConnect extends HBox {
                     comboBoxStopBits.setDisable(false);
                     comboBoxEvenODD.setDisable(false);
                     button.setText("连接");
-                    button.setStyle("-fx-font-weight:bold;" + "-fx-background-color: #07b800");
+                    button.setStyle("-fx-font-weight:bold;" + "-fx-background-color: #8dd249");
                     setStyle("-fx-background-color:#d2d2d2");
                 }
             }
