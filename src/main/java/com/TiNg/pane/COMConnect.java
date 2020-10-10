@@ -35,14 +35,14 @@ public class COMConnect extends HBox {
     List<String> dataBitsList = new ArrayList<String>();
     List<String> stopBitsList = new ArrayList<String>();
     Properties properties = new Properties();
-    FileInputStream inputStream;
+    FileInputStream fileInputStream;
     BufferedReader bufferedReader;
 
 
     public COMConnect(int width) {
         try {
-            inputStream = new FileInputStream("src/main/resources/address.properties");
-            bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+            fileInputStream = new FileInputStream("src/main/resources/address.properties");  //properties文件设置
+            bufferedReader = new BufferedReader(new InputStreamReader(fileInputStream));
             properties.load(bufferedReader);
         } catch (FileNotFoundException e) {
             e.printStackTrace();

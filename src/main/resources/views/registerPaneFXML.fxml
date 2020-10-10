@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="400.0" minHeight="-Infinity" minWidth="-Infinity" prefWidth="400.0" style="-fx-background-color: #8B864E;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox maxWidth="400.0" prefWidth="400.0" spacing="5.0">
+         <children>
+            <HBox alignment="CENTER" maxWidth="200.0" prefWidth="200.0" spacing="10.0">
+               <children>
+                  <AnchorPane maxWidth="200.0" nodeOrientation="RIGHT_TO_LEFT" prefWidth="200.0">
+                     <children>
+                        <Label id="LabelRegisterName" layoutX="-7.0" layoutY="4.0" maxWidth="120.0" text="Label测试" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane nodeOrientation="RIGHT_TO_LEFT" prefWidth="10.0">
+                     <children>
+                        <Label layoutX="-7.0" layoutY="4.0" text="：" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane maxWidth="120.0" prefWidth="120.0">
+                     <children>
+                        <Label id="LabelRegisterValue" layoutY="4.0" text="123467.1" />
+                     </children>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </AnchorPane>
+               </children>
+               <padding>
+                  <Insets bottom="5.0" top="5.0" />
+               </padding>
+            </HBox>
+            <Separator orientation="VERTICAL">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <HBox.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </HBox.margin></Separator>
+            <HBox prefWidth="200.0" spacing="10.0">
+               <children>
+                  <AnchorPane prefWidth="200.0">
+                     <children>
+                        <TextField id="TextFieldRegister" prefWidth="90.0" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefWidth="200.0">
+                     <children>
+                        <Button id="ButtonRegister" mnemonicParsing="false" prefWidth="60.0" text="应用" />
+                     </children>
+                  </AnchorPane>
+               </children>
+               <padding>
+                  <Insets bottom="5.0" top="5.0" />
+               </padding>
+            </HBox>
+         </children>
+      </HBox>
+   </children>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
+</AnchorPane>
