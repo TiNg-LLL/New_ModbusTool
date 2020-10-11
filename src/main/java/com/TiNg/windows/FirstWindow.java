@@ -6,6 +6,8 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+import java.net.URL;
+
 public class FirstWindow extends Stage {
     AnchorPane anchorPane = new AnchorPane();
     Scene scene = new Scene(anchorPane);
@@ -17,7 +19,10 @@ public class FirstWindow extends Stage {
         setTitle("New_ModbusTool -ver0.0.0");
         setWidth(windowWidth);
         setHeight(windowHeight);
-        anchorPane.setStyle("-fx-background-color:#a5a3a3");
+        anchorPane.setStyle("-fx-background-color:#848484");
+
+//        URL cssURL = this.getClass().getClassLoader().getResource("styles/ButtonStyles.css");
+//        scene.getStylesheets().add(cssURL.toExternalForm());
         setScene(scene);
 
         COMConnect comConnect = new COMConnect(windowWidth);  //COM连接pane
@@ -26,8 +31,8 @@ public class FirstWindow extends Stage {
 
         RegisterPane registerPane = new RegisterPane();  //寄存器读取pane
         anchorPane.getChildren().add(registerPane);
-        AnchorPane.setTopAnchor(registerPane, 60.0);
-        AnchorPane.setLeftAnchor(registerPane, 20.0);
+        AnchorPane.setTopAnchor(registerPane, 50.0);
+        AnchorPane.setLeftAnchor(registerPane, 10.0);
 
         show();
     }

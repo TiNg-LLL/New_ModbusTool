@@ -44,7 +44,8 @@ public class RegisterPane extends VBox {
             list.add(new RegisterSinglePane());
             listInt.add(list.get(i).getRegisterReadThread().getI1());
         }
-        setSpacing(5);  //设置上下间距
+        setSpacing(2);  //设置上下间距
+        setStyle("-fx-background-color: #adadad;"+ "-fx-background-radius: 5");
         getChildren().addAll(list);
 
         for (int i = 0; i < registerPaneQuantity; i++) {  //初始设置
@@ -67,7 +68,7 @@ public class RegisterPane extends VBox {
                             listInt.set(i, list.get(i).getRegisterReadThread().getI1());
                             list.get(i).getLabel().setText(Integer.toString(dataTreat.readtenToBinary(listInt.get(i))));
                         } catch (Exception e) {
-                            list.get(i).getLabel().setText("错误");
+                            list.get(i).getLabel().setText("null");
                         }
 
                     }

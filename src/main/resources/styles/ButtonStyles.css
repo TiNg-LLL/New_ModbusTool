@@ -1,0 +1,17 @@
+/* Normal white Button as seen on Google.com*/
+
+
+.button:hover{
+    -fx-cursor: hand;
+}
+
+.button{
+    -fx-background-color: linear-gradient(to bottom,#7dc2fe,#004883);
+    -fx-font-size: 14px;
+    -fx-pref-width:64px;
+    -fx-pref-height: 28px;
+    -fx-text-alignment: center;
+    -fx-text-fill: #fff;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+}

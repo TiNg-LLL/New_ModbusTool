@@ -17,6 +17,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
 
 import java.io.*;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -98,13 +99,16 @@ public class COMConnect extends HBox {
 
         final Separator separator = new Separator(); //分割符
         separator.setOrientation(Orientation.VERTICAL);
-        separator.setValignment(VPos.CENTER);
+        separator.setStyle("-fx-blend-mode: multiply");
         getChildren().add(separator);
 
         button.setText("连接");  //连接按钮
         button.setFont(Font.font("微软雅体"));
         button.setPrefSize(80.0, 5.0);
-        button.setStyle("-fx-font-weight:bold;" + "-fx-background-color: #8dd249");
+        button.setStyle("-fx-font-weight:bold;" + "-fx-background-color: #8dd249;");
+        URL cssURL = this.getClass().getClassLoader().getResource("styles/ButtonStyles.css");
+        this.getStylesheets().add(cssURL.toExternalForm());
+        button.setId("button");
         button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
