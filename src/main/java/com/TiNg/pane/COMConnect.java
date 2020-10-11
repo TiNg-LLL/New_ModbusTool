@@ -33,7 +33,7 @@ public class COMConnect extends AnchorPane {
     Button button = new Button();
 
     COMDate comDate = new COMDate();
-    Modbus modbus = new Modbus();
+    public static Modbus modbus = new Modbus();
     List<String> dataBitsList = new ArrayList<String>();
     List<String> stopBitsList = new ArrayList<String>();
     Properties properties = new Properties();
@@ -146,6 +146,7 @@ public class COMConnect extends AnchorPane {
                         setStyle("-fx-background-color:#8dd249");
                     }
                 } else {
+                    modbus.ModbusDisconnect();
                     System.out.println("COM端口已断开");
                     comboBoxCOM.setDisable(false);
                     comboBoxBaudrate.setDisable(false);

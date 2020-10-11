@@ -1,33 +1,28 @@
 package com.TiNg.datatreat;
 
-import javafx.scene.control.Label;
+import com.TiNg.pane.COMConnect;
 
 public class RegisterReadThread extends Thread {
-    Modbus modbus = new Modbus();
-    DataTreat dataTreat = new DataTreat();
+    Modbus modbus = COMConnect.modbus;
     int registerReadAddress;
-    Label label = new Label();
+    int[] i1;
 
-    public RegisterReadThread(int registerReadAddress, Label label) {
+    public RegisterReadThread(int registerReadAddress) {
         this.registerReadAddress = registerReadAddress;
-        this.label = label;
     }
 
     public void run() {
         while (true) {
             try {
-                Thread.sleep(1000);
+                Thread.sleep(100);
             } catch (Exception e) {
             }
             try {
                 if (modbus.ModbusisConnected()) {
-                    int[] i1 = modbus.ModbusreadHoldingRegisters(1, registerReadAddress, 2);
-                    label.setText(Integer.toString(dataTreat.readtenToBinary(i1)));
-                } else {
-                    label.setText("  ");
+                    i1 = modbus.ModbusreadHoldingRegisters(1, registerReadAddress, 2);
                 }
             } catch (Exception e) {
-                label.setText("null");
+                e.printStackTrace();
             }
         }
     }
@@ -38,7 +33,7 @@ public class RegisterReadThread extends Thread {
         this.registerReadAddress = registerReadAddress;
     }
 
-    public void setLabel(Label label) {
-        this.label = label;
+    public int[] getI1() {
+        return i1;
     }
 }

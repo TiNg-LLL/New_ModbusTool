@@ -1,7 +1,14 @@
 package com.TiNg.pane;
 
+import com.TiNg.datatreat.DataTreat;
+import com.TiNg.datatreat.Modbus;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -11,7 +18,12 @@ import java.util.Properties;
 public class RegisterPane extends VBox {
 
     List<RegisterSinglePane> list = new ArrayList<RegisterSinglePane>();
-    int registerPaneQuantity = 14;  //寄存器功能数量
+    int registerPaneQuantity = 15;  //寄存器功能数量
+
+    Timeline timeline = new Timeline();
+    List<int[]> listInt = new ArrayList<int[]>();
+    Modbus modbus = COMConnect.modbus;
+    DataTreat dataTreat = new DataTreat();
 
     Properties properties = new Properties();
     FileInputStream fileInputStream;
@@ -30,6 +42,7 @@ public class RegisterPane extends VBox {
 
         for (int i = 0; i < registerPaneQuantity; i++) {
             list.add(new RegisterSinglePane());
+            listInt.add(list.get(i).getRegisterReadThread().getI1());
         }
         setSpacing(5);  //设置上下间距
         getChildren().addAll(list);
@@ -38,11 +51,36 @@ public class RegisterPane extends VBox {
             Label label = (Label) list.get(i).getAnchorPane().lookup("#LabelRegisterName");
             label.setText(properties.getProperty("LabelRegisterName" + (i + 1)));
             list.get(i).setRegisterWriteAddress(Integer.parseInt(properties.getProperty("RegisterWriteAddress" + (i + 1))));
-            if ((properties.getProperty("RegisterReadAddress" + (i + 1))) == null) {
+            if (Integer.parseInt(properties.getProperty("RegisterReadAddress" + (i + 1))) == 0) {
                 list.get(i).setRegisterReadAddress(Integer.parseInt(properties.getProperty("RegisterWriteAddress" + (i + 1))));
             } else {
                 list.get(i).setRegisterReadAddress(Integer.parseInt(properties.getProperty("RegisterReadAddress" + (i + 1))));
             }
         }
+
+        KeyFrame keyFrame = new KeyFrame(Duration.millis(200), "keyFrame", new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                if (modbus.ModbusisConnected()) {
+                    for (int i = 0; i < registerPaneQuantity; i++) {
+                        try {
+                            listInt.set(i, list.get(i).getRegisterReadThread().getI1());
+                            list.get(i).getLabel().setText(Integer.toString(dataTreat.readtenToBinary(listInt.get(i))));
+                        } catch (Exception e) {
+                            list.get(i).getLabel().setText("错误");
+                        }
+
+                    }
+                } else {
+                    for (int i = 0; i < registerPaneQuantity; i++) {
+                        list.get(i).getLabel().setText("null");
+                    }
+                }
+            }
+        });
+
+        timeline.getKeyFrames().addAll(keyFrame);
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
     }
 }

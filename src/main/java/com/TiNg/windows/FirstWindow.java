@@ -27,7 +27,7 @@ public class FirstWindow extends Stage {
         RegisterPane registerPane = new RegisterPane();  //寄存器读取pane
         anchorPane.getChildren().add(registerPane);
         AnchorPane.setTopAnchor(registerPane, 60.0);
-        AnchorPane.setLeftAnchor(registerPane, 50.0);
+        AnchorPane.setLeftAnchor(registerPane, 20.0);
 
         show();
     }

@@ -19,5 +19,6 @@ public class MainLauncher extends Application {
     @Override
     public void stop() throws Exception {
         System.out.println(df.format(new Date()) + " " + "主窗口已退出");
+        System.exit(0);
     }
 }

@@ -1,9 +1,6 @@
 package com.TiNg.pane;
 
-import com.TiNg.datatreat.DataTreat;
-import com.TiNg.datatreat.Modbus;
 import com.TiNg.datatreat.RegisterReadThread;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -14,10 +11,8 @@ import javafx.scene.layout.AnchorPane;
 import java.io.*;
 import java.net.URL;
 
-public class RegisterSinglePane extends AnchorPane{
-
-    Modbus modbus = new Modbus();
-    DataTreat dataTreat = new DataTreat();
+public class RegisterSinglePane extends AnchorPane {
+    RegisterReadThread registerReadThread;
 
     FXMLLoader fxmlLoader = new FXMLLoader();
     URL url = fxmlLoader.getClassLoader().getResource("views/registerPaneFXML.fxml");
@@ -47,8 +42,38 @@ public class RegisterSinglePane extends AnchorPane{
 
         label = (Label) anchorPane.lookup("#LabelRegisterValue");  //拿到label
 
-        RegisterReadThread registerReadThread = new RegisterReadThread(registerReadAddress, label);
-        //registerReadThread.start();
+//        KeyFrame keyFrame = new KeyFrame(Duration.millis(1000), "keyFrame", new EventHandler<ActionEvent>() {
+//            @Override
+//            public void handle(ActionEvent event) {
+//                try {
+//                    label.setText(Integer.toString(dataTreat.readtenToBinary(modbus.ModbusreadHoldingRegisters(1, registerReadAddress, 2))));
+//                }catch (Exception e){
+//                    label.setText("null");
+//                    e.printStackTrace();
+//                }
+//                System.out.println(registerReadAddress);
+//                //System.out.println("123123");
+//                System.out.println(Thread.currentThread().getName());
+//            }
+//        });
+//
+//        timeline.getKeyFrames().addAll(keyFrame);
+//        timeline.setCycleCount(Timeline.INDEFINITE);
+//        timeline.play();
+
+/*        try {
+            if (modbus.ModbusisConnected()) {
+                int[] i1 = modbus.ModbusreadHoldingRegisters(1, registerReadAddress, 2);
+                label.setText(Integer.toString(dataTreat.readtenToBinary(i1)));
+            } else {
+                label.setText("123");
+            }
+        } catch (Exception e) {
+            label.setText("null");
+        }*/
+
+        registerReadThread = new RegisterReadThread(registerReadAddress);
+        registerReadThread.start();
     }
 
 
@@ -71,5 +96,12 @@ public class RegisterSinglePane extends AnchorPane{
 
     public void setRegisterReadAddress(int registerReadAddress) {
         this.registerReadAddress = registerReadAddress;
+    }
+
+    public RegisterReadThread getRegisterReadThread() {
+        return registerReadThread;
+    }
+    public Label getLabel() {
+        return label;
     }
 }
