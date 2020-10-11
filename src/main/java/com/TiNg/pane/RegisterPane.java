@@ -47,14 +47,14 @@ public class RegisterPane extends VBox {
         setSpacing(5);  //设置上下间距
         getChildren().addAll(list);
 
-        for (int i = 0; i < registerPaneQuantity; i++) {
-            Label label = (Label) list.get(i).getAnchorPane().lookup("#LabelRegisterName");
-            label.setText(properties.getProperty("LabelRegisterName" + (i + 1)));
-            list.get(i).setRegisterWriteAddress(Integer.parseInt(properties.getProperty("RegisterWriteAddress" + (i + 1))));
-            if (Integer.parseInt(properties.getProperty("RegisterReadAddress" + (i + 1))) == 0) {
-                list.get(i).setRegisterReadAddress(Integer.parseInt(properties.getProperty("RegisterWriteAddress" + (i + 1))));
+        for (int i = 0; i < registerPaneQuantity; i++) {  //初始设置
+            Label label = (Label) list.get(i).getAnchorPane().lookup("#LabelRegisterName");  //拿到名称label
+            label.setText(properties.getProperty("LabelRegisterName" + (i + 1)));  //设置名称
+            list.get(i).setRegisterWriteAddress(Integer.parseInt(properties.getProperty("RegisterWriteAddress" + (i + 1))));  //设置寄存器写入地址
+            if (Integer.parseInt(properties.getProperty("RegisterReadAddress" + (i + 1))) == 0) {  //设置寄存器读取地址
+                list.get(i).getRegisterReadThread().setRegisterReadAddress(Integer.parseInt(properties.getProperty("RegisterWriteAddress" + (i + 1))));
             } else {
-                list.get(i).setRegisterReadAddress(Integer.parseInt(properties.getProperty("RegisterReadAddress" + (i + 1))));
+                list.get(i).getRegisterReadThread().setRegisterReadAddress(Integer.parseInt(properties.getProperty("RegisterReadAddress" + (i + 1))));
             }
         }
 

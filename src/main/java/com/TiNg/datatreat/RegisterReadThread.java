@@ -7,10 +7,6 @@ public class RegisterReadThread extends Thread {
     int registerReadAddress;
     int[] i1;
 
-    public RegisterReadThread(int registerReadAddress) {
-        this.registerReadAddress = registerReadAddress;
-    }
-
     public void run() {
         while (true) {
             try {
@@ -36,4 +32,6 @@ public class RegisterReadThread extends Thread {
     public int[] getI1() {
         return i1;
     }
+
+
 }

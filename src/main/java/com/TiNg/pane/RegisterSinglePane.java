@@ -72,7 +72,7 @@ public class RegisterSinglePane extends AnchorPane {
             label.setText("null");
         }*/
 
-        registerReadThread = new RegisterReadThread(registerReadAddress);
+        registerReadThread = new RegisterReadThread();
         registerReadThread.start();
     }
 
