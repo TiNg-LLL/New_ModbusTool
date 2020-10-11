@@ -5,7 +5,6 @@ import com.TiNg.datatreat.Modbus;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.VPos;
@@ -14,7 +13,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Separator;
 import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
 
@@ -23,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-public class COMConnect extends AnchorPane {
+public class COMConnect extends HBox {
 
     ComboBox<String> comboBoxCOM = new ComboBox<String>();
     ComboBox<String> comboBoxBaudrate = new ComboBox<String>();
@@ -40,15 +38,8 @@ public class COMConnect extends AnchorPane {
     FileInputStream fileInputStream;
     BufferedReader bufferedReader;
 
-    public COMConnect(int width) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(fxmlLoader.getClassLoader().getResource("views/COMConnect.fxml"));
-        HBox hBox = (HBox)fxmlLoader.load();
-        getChildren().add(hBox);
-    }
 
-
- /*   public COMConnect(int width) {
+    public COMConnect(int width) {
         try {
             fileInputStream = new FileInputStream("src/main/resources/address.properties");  //properties文件设置
             bufferedReader = new BufferedReader(new InputStreamReader(fileInputStream));
@@ -160,5 +151,5 @@ public class COMConnect extends AnchorPane {
             }
         });
         getChildren().add(button);
-    }*/
+    }
 }
