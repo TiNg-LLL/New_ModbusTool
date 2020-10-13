@@ -2,10 +2,10 @@ package com.TiNg.datatreat;
 
 import com.TiNg.pane.COMConnect;
 
-public class RegisterReadThread extends Thread {
+public class CoilReadThread extends Thread {
     Modbus modbus = COMConnect.modbus;
-    int registerReadAddress;
-    int[] i1;
+    int coilReadAddress;
+    boolean[] b1;
 
     public void run() {
         while (true) {
@@ -15,8 +15,7 @@ public class RegisterReadThread extends Thread {
             }
             try {
                 if (modbus.ModbusisConnected()) {
-                    i1 = modbus.ModbusreadHoldingRegisters(1, registerReadAddress, 2);
-                } else {
+                    b1 = modbus.ModbusreadCoils(1, coilReadAddress, 1);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -26,13 +25,17 @@ public class RegisterReadThread extends Thread {
 
 
     //get、set方法
-    public void setRegisterReadAddress(int registerReadAddress) {
-        this.registerReadAddress = registerReadAddress;
+
+
+    public void setCoilReadAddress(int coilReadAddress) {
+        this.coilReadAddress = coilReadAddress;
     }
 
-    public int[] getI1() {
-        return i1;
+    public int getCoilReadAddress() {
+        return coilReadAddress;
     }
 
-
+    public boolean[] getB1() {
+        return b1;
+    }
 }

@@ -2,6 +2,7 @@ package com.TiNg.pane;
 
 import com.TiNg.datatreat.DataTreat;
 import com.TiNg.datatreat.Modbus;
+import com.TiNg.datatreat.RegisterDataFlashThread;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -23,7 +24,7 @@ public class RegisterPane extends VBox {
     Timeline timeline = new Timeline();
     List<int[]> listInt = new ArrayList<int[]>();
     Modbus modbus = COMConnect.modbus;
-    DataTreat dataTreat = new DataTreat();
+    public static DataTreat dataTreat = new DataTreat();
 
     Properties properties = new Properties();
     FileInputStream fileInputStream;
@@ -45,7 +46,7 @@ public class RegisterPane extends VBox {
             listInt.add(list.get(i).getRegisterReadThread().getI1());
         }
         setSpacing(2);  //设置上下间距
-        setStyle("-fx-background-color: #adadad;"+ "-fx-background-radius: 5");
+        //setStyle("-fx-background-color: #878787;"+ "-fx-background-radius: 5");
         getChildren().addAll(list);
 
         for (int i = 0; i < registerPaneQuantity; i++) {  //初始设置
@@ -59,18 +60,16 @@ public class RegisterPane extends VBox {
             }
         }
 
-        KeyFrame keyFrame = new KeyFrame(Duration.millis(200), "keyFrame", new EventHandler<ActionEvent>() {
+        KeyFrame keyFrame = new KeyFrame(Duration.millis(1), "keyFrame", new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 if (modbus.ModbusisConnected()) {
                     for (int i = 0; i < registerPaneQuantity; i++) {
                         try {
-                            listInt.set(i, list.get(i).getRegisterReadThread().getI1());
                             list.get(i).getLabel().setText(Integer.toString(dataTreat.readtenToBinary(listInt.get(i))));
                         } catch (Exception e) {
-                            list.get(i).getLabel().setText("null");
+                            list.get(i).getLabel().setText("null1");
                         }
-
                     }
                 } else {
                     for (int i = 0; i < registerPaneQuantity; i++) {
@@ -83,5 +82,17 @@ public class RegisterPane extends VBox {
         timeline.getKeyFrames().addAll(keyFrame);
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
+    }
+
+    public List<int[]> getListInt() {
+        return listInt;
+    }
+
+    public List<RegisterSinglePane> getList() {
+        return list;
+    }
+
+    public int getRegisterPaneQuantity() {
+        return registerPaneQuantity;
     }
 }

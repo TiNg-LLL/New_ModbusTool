@@ -7,7 +7,6 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
-import javafx.geometry.VPos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Separator;
@@ -51,7 +50,7 @@ public class COMConnect extends HBox {
             e.printStackTrace();
         }
 
-        setStyle("-fx-background-color:#d2d2d2");
+        setStyle("-fx-background-color:#b3b3b3");
         setPrefWidth(width);
         setPadding(new Insets(3, 6, 3, 6));  //节点到边缘的距离
         setSpacing(5);  //节点之间的间距
@@ -104,11 +103,9 @@ public class COMConnect extends HBox {
 
         button.setText("连接");  //连接按钮
         button.setFont(Font.font("微软雅体"));
-        button.setPrefSize(80.0, 5.0);
-        button.setStyle("-fx-font-weight:bold;" + "-fx-background-color: #8dd249;");
-        URL cssURL = this.getClass().getClassLoader().getResource("styles/ButtonStyles.css");
+        URL cssURL = this.getClass().getClassLoader().getResource("styles/ButtonStyles.css");  //加载css文件
         this.getStylesheets().add(cssURL.toExternalForm());
-        button.setId("button");
+        button.setId("connectBtn");
         button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -136,8 +133,7 @@ public class COMConnect extends HBox {
                         comboBoxStopBits.setDisable(true);
                         comboBoxEvenODD.setDisable(true);
                         button.setText("断开");
-                        button.setStyle("-fx-font-weight:bold;" + "-fx-background-color: #d2d2d2");
-                        //setStyle("-fx-background-color: linear-gradient(to right,#d2d2d2,#07b800);");
+                        button.setId("connectBtn1");
                         setStyle("-fx-background-color:#8dd249");
                     }
                 } else {
@@ -149,8 +145,8 @@ public class COMConnect extends HBox {
                     comboBoxStopBits.setDisable(false);
                     comboBoxEvenODD.setDisable(false);
                     button.setText("连接");
-                    button.setStyle("-fx-font-weight:bold;" + "-fx-background-color: #8dd249");
-                    setStyle("-fx-background-color:#d2d2d2");
+                    button.setId("connectBtn");
+                    setStyle("-fx-background-color:#b3b3b3");
                 }
             }
         });

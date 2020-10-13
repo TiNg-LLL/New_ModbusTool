@@ -1,34 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="400.0" minHeight="-Infinity" minWidth="-Infinity" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="380.0" minHeight="-Infinity" minWidth="-Infinity" prefWidth="380.0" style="-fx-background-radius: 5; -fx-background-color: #a0a0a0;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <HBox maxWidth="400.0" prefWidth="400.0" spacing="5.0">
+      <HBox maxWidth="380.0" prefWidth="380.0" spacing="5.0">
          <children>
-            <HBox alignment="CENTER" maxWidth="200.0" prefWidth="200.0" spacing="10.0">
+            <HBox alignment="CENTER" maxWidth="180.0" prefWidth="180.0" spacing="5.0">
                <children>
-                  <AnchorPane maxWidth="200.0" nodeOrientation="RIGHT_TO_LEFT" prefWidth="200.0">
+                  <AnchorPane maxWidth="180.0" nodeOrientation="RIGHT_TO_LEFT" prefWidth="180.0">
                      <children>
-                        <Label id="LabelRegisterName" layoutX="-7.0" layoutY="4.0" maxWidth="120.0" text="Label测试" />
+                        <Label id="LabelRegisterName" layoutX="-7.0" layoutY="2.0" maxWidth="120.0" text="Label测试">
+                           <font>
+                              <Font size="14.0" />
+                           </font></Label>
                      </children>
                   </AnchorPane>
                   <AnchorPane nodeOrientation="RIGHT_TO_LEFT" prefWidth="10.0">
                      <children>
-                        <Label layoutX="-7.0" layoutY="4.0" text="：" />
+                        <Label layoutX="10.0" layoutY="3.0" text="：" />
                      </children>
                   </AnchorPane>
                   <AnchorPane maxWidth="120.0" prefWidth="120.0">
                      <children>
-                        <Label id="LabelRegisterValue" layoutY="4.0" text="123467.1" />
+                        <Label id="LabelRegisterValue" layoutX="-11.0" layoutY="4.0" text="123467.1" />
                      </children>
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
+                     <effect>
+                        <Lighting diffuseConstant="0.0" specularConstant="0.0" specularExponent="0.0" surfaceScale="0.0">
+                           <bumpInput>
+                              <Shadow />
+                           </bumpInput>
+                           <light>
+                              <Light.Distant color="BLACK" />
+                           </light>
+                        </Lighting>
+                     </effect>
                   </AnchorPane>
                </children>
                <padding>
@@ -42,14 +56,14 @@
                <HBox.margin>
                   <Insets bottom="5.0" top="5.0" />
                </HBox.margin></Separator>
-            <HBox prefWidth="200.0" spacing="10.0">
+            <HBox prefWidth="160.0" spacing="10.0">
                <children>
-                  <AnchorPane prefWidth="200.0">
+                  <AnchorPane prefWidth="160.0">
                      <children>
                         <TextField id="TextFieldRegister" prefWidth="90.0" />
                      </children>
                   </AnchorPane>
-                  <AnchorPane prefWidth="200.0">
+                  <AnchorPane prefWidth="120.0">
                      <children>
                         <Button id="ButtonRegister" mnemonicParsing="false" prefWidth="70.0" text="应用" />
                      </children>
@@ -65,4 +79,7 @@
    <opaqueInsets>
       <Insets />
    </opaqueInsets>
+   <effect>
+      <Blend />
+   </effect>
 </AnchorPane>
