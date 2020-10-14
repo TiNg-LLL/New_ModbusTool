@@ -1,5 +1,6 @@
 package com.TiNg.datatreat;
 
+import com.TiNg.pane.registers.RegistersPane;
 import com.intelligt.modbus.jlibmodbus.exception.ModbusIOException;
 import com.intelligt.modbus.jlibmodbus.exception.ModbusNumberException;
 import com.intelligt.modbus.jlibmodbus.exception.ModbusProtocolException;
@@ -10,10 +11,13 @@ import com.intelligt.modbus.jlibmodbus.serial.SerialPort;
 import com.intelligt.modbus.jlibmodbus.serial.SerialPortFactoryJSerialComm;
 import com.intelligt.modbus.jlibmodbus.serial.SerialUtils;
 
+import java.util.Properties;
+
 public class Modbus {
 
     SerialParameters sp = new SerialParameters();
     ModbusMaster mm = null;
+    Properties properties = RegistersPane.properties;
 
     //连接
     public void ModbusConnect(String comName, Integer baudrate, Integer dataBits, Integer stopBits, String EvenODD) throws Exception {
@@ -36,7 +40,7 @@ public class Modbus {
         }
         try {
             mm = ModbusMasterFactory.createModbusMasterRTU(sp);
-            mm.setResponseTimeout(20);
+            mm.setResponseTimeout(Integer.parseInt(properties.getProperty("ModbusResponseTimeout")));
             mm.connect();
         } catch (Exception e) {
             //e.printStackTrace();

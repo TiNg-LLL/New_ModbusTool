@@ -1,7 +1,7 @@
-package com.TiNg.pane;
+package com.TiNg.pane.coils;
 
-import com.TiNg.datatreat.CoilReadThread;
 import com.TiNg.datatreat.Modbus;
+import com.TiNg.pane.COMConnect;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.net.URL;
 
 public class CoilSinglePane extends AnchorPane {
-    CoilReadThread coilReadThread;  //读取线程
 
     FXMLLoader fxmlLoader = new FXMLLoader();
     URL url = fxmlLoader.getClassLoader().getResource("views/coilsPaneFXML.fxml");
@@ -22,6 +21,8 @@ public class CoilSinglePane extends AnchorPane {
     int coilsReadAddress;
     Modbus modbus = COMConnect.modbus;
     Button button;
+    int i;
+
 
     public CoilSinglePane() {
         fxmlLoader.setLocation(url);  //加载fxml文件
@@ -42,20 +43,17 @@ public class CoilSinglePane extends AnchorPane {
             @Override
             public void handle(ActionEvent event) {
                 try {
-                    boolean[] b = modbus.ModbusreadCoils(1, coilReadThread.getCoilReadAddress(), 1);
+                    boolean[] b = modbus.ModbusreadCoils(1, coilsWriteAddress, 1);
                     if (b[0]) {
-                        modbus.ModbuswritefalseMultipleCoils(1, coilReadThread.getCoilReadAddress());
+                        modbus.ModbuswritefalseMultipleCoils(1, coilsWriteAddress);
                     } else {
-                        modbus.ModbuswritetrueMultipleCoils(1, coilReadThread.getCoilReadAddress());
+                        modbus.ModbuswritetrueMultipleCoils(1, coilsWriteAddress);
                     }
                 } catch (Exception e1) {
 
                 }
             }
         });
-
-        coilReadThread = new CoilReadThread();
-        coilReadThread.start();
     }
 
 
@@ -84,7 +82,12 @@ public class CoilSinglePane extends AnchorPane {
         return button;
     }
 
-    public CoilReadThread getCoilReadThread() {
-        return coilReadThread;
+
+    public int getI() {
+        return i;
+    }
+
+    public void setI(int i) {
+        this.i = i;
     }
 }

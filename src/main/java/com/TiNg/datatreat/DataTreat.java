@@ -1,7 +1,11 @@
 package com.TiNg.datatreat;
 
+import java.math.BigDecimal;
+
 public class DataTreat {
     int coilAddress;
+    int registerAddress;
+    BigDecimal bigDecimal;
 
     public int[] tenToBinary(int i) {  //寄存器写入转换
         String s = Integer.toBinaryString(i);
@@ -13,7 +17,7 @@ public class DataTreat {
         return i3;
     }
 
-    public int readtenToBinary(int[] i) {  //寄存器读取转换
+    public int readTenToBinary(int[] i) {  //寄存器读取转换
         String s = Integer.toBinaryString(i[0]);
         while (s.length() < 16) {
             s = "0" + s;
@@ -24,7 +28,7 @@ public class DataTreat {
         return i1;
     }
 
-/*    public float readtenToBinarytoMM(int[] i, NewJPanel newJPanel) {
+    public double registerDataToMM(int[] i) {  //寄存器数据转换为mm单位方法
         String s = Integer.toBinaryString(i[0]);
         while (s.length() < 16) {
             s = "0" + s;
@@ -33,12 +37,22 @@ public class DataTreat {
         String s2 = s1 + s;
         int i2 = Integer.valueOf(s2, 2);
         //System.out.println(i2);
-        float i4 = (float) i2;
-        float i3 = (i4 * 5 / newJPanel.getwulisubi() / newJPanel.getbujinxifen());
+        double i4 = i2;
+        double i3 = (i4 * 5 / 12 / 1000);  //速比脉冲数
+        i3 = (double) (Math.round(i3 * 100)) / 100;  //保留两位小数
         return i3;
-    }*/
+    }
 
-    public int coilAddressTransform(String MXY, int coilAddress) {
+    public int registerAddressTransform(int registerAddress) {  //线圈输入地址转换
+        if (registerAddress < 8000) {
+            this.registerAddress = registerAddress;
+        } else {
+            this.registerAddress = registerAddress + 8384;
+        }
+        return this.registerAddress;
+    }
+
+    public int coilAddressTransform(String MXY, int coilAddress) {  //线圈输入地址转换
         if (MXY.equals("M")) {
             if (coilAddress < 8000) {
                 this.coilAddress = coilAddress;
@@ -47,18 +61,18 @@ public class DataTreat {
             }
         } else if (MXY.equals("Y")) {
             if (coilAddress < 8) {
-                coilAddress = coilAddress + 18432;
+                this.coilAddress = coilAddress + 18432;
             } else {
-                coilAddress = coilAddress + 18430;
+                this.coilAddress = coilAddress + 18430;
             }
         } else {
             if (coilAddress < 8) {
-                coilAddress = coilAddress + 16384;
+                this.coilAddress = coilAddress + 16384;
             } else {
-                coilAddress = coilAddress + 16382;
+                this.coilAddress = coilAddress + 16382;
             }
         }
 
-        return coilAddress;
+        return this.coilAddress;
     }
 }

@@ -1,11 +1,10 @@
 package com.TiNg.windows;
 
-import com.TiNg.datatreat.CoilDataFlashThread;
-import com.TiNg.datatreat.RegisterDataFlashThread;
+import com.TiNg.datatreat.ReadThread;
 import com.TiNg.pane.COMConnect;
-import com.TiNg.pane.CoilsPane;
-import com.TiNg.pane.RegisterPane;
-import com.TiNg.pane.RegisterSinglePane;
+import com.TiNg.pane.coils.CoilsPane;
+import com.TiNg.pane.registers.RegisterLabelPane;
+import com.TiNg.pane.registers.RegistersPane;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -14,18 +13,19 @@ public class FirstWindow extends Stage {
     AnchorPane anchorPane = new AnchorPane();
     Scene scene = new Scene(anchorPane);
 
-    int windowWidth = 1000;
-    int windowHeight = 700;
+    int windowWidth = 890;
+    int windowHeight = 500;
 
-    public static RegisterPane registerPane;
+    public static RegistersPane registersPane;
+    public static RegisterLabelPane registerLabelPane;
     public static CoilsPane coilsPane;
 
     public FirstWindow() {
         setTitle("New_ModbusTool -ver0.0.0");
         setWidth(windowWidth);
         setHeight(windowHeight);
-        setResizable(false);
-        anchorPane.setStyle("-fx-background-color:#ffffff");
+        //setResizable(false);
+        anchorPane.setStyle("-fx-background-color:#d7d7d7");
 
         setScene(scene);
 
@@ -33,25 +33,18 @@ public class FirstWindow extends Stage {
         anchorPane.getChildren().add(comConnect);
         AnchorPane.setBottomAnchor(comConnect, 0.0);
 
-        registerPane = new RegisterPane();  //寄存器功能pane
-        anchorPane.getChildren().add(registerPane);
-        AnchorPane.setTopAnchor(registerPane, 50.0);
-        AnchorPane.setLeftAnchor(registerPane, 25.0);
+        registersPane = new RegistersPane();  //寄存器读写功能pane
+        anchorPane.getChildren().add(registersPane);
+        AnchorPane.setTopAnchor(registersPane, 50.0);
+        AnchorPane.setLeftAnchor(registersPane, 25.0);
 
         coilsPane = new CoilsPane();  //线圈功能pane
         anchorPane.getChildren().add(coilsPane);
         AnchorPane.setTopAnchor(coilsPane, 50.0);
-        AnchorPane.setLeftAnchor(coilsPane, 500.0);
+        AnchorPane.setLeftAnchor(coilsPane, 450.0);
 
-        for (int i = 0; i < registerPane.getRegisterPaneQuantity(); i++) {
-            RegisterDataFlashThread registerDataFlashThread = new RegisterDataFlashThread(i);
-            registerDataFlashThread.start();
-        }
-
-        for (int i = 0; i < coilsPane.getCoilsPaneQuantity(); i++) {
-            CoilDataFlashThread coilDataFlashThread = new CoilDataFlashThread(i);
-            coilDataFlashThread.start();
-        }
+        ReadThread readThread = new ReadThread();  //modbus读取单线程
+        readThread.start();
 
         show();
     }

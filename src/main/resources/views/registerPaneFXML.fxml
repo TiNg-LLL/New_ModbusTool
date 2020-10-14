@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
@@ -28,7 +29,10 @@
                   </AnchorPane>
                   <AnchorPane maxWidth="120.0" prefWidth="120.0">
                      <children>
-                        <Label id="LabelRegisterValue" layoutX="-11.0" layoutY="4.0" text="123467.1" />
+                        <Label id="LabelRegisterValue" layoutX="-16.0" layoutY="3.0" text="123467.1">
+                           <font>
+                              <Font size="14.0" />
+                           </font></Label>
                      </children>
                      <HBox.margin>
                         <Insets />
@@ -65,7 +69,10 @@
                   </AnchorPane>
                   <AnchorPane prefWidth="120.0">
                      <children>
-                        <Button id="ButtonRegister" mnemonicParsing="false" prefWidth="70.0" text="应用" />
+                        <Button id="ButtonRegister" mnemonicParsing="false" prefWidth="70.0" style="-fx-background-radius: 3;" text="应用">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></Button>
                      </children>
                   </AnchorPane>
                </children>
