@@ -4,14 +4,14 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class AttachWindow extends Stage {
+public class SettingRegisterDatatommWindow extends Stage {
     AnchorPane anchorPane = new AnchorPane();
     Scene scene = new Scene(anchorPane);
 
-    public AttachWindow() {
+    public SettingRegisterDatatommWindow() {
         setTitle("New_ModbusTool -ver0.0.0");
-        setWidth(800);
-        setHeight(500);
+        setWidth(600);
+        setHeight(400);
         anchorPane.setStyle("-fx-background-color:#FFB6C1");
         setScene(scene);
     }

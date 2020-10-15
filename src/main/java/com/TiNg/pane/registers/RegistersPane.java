@@ -18,7 +18,7 @@ import java.util.Properties;
 
 public class RegistersPane extends VBox {
 
-    List<RegisterSinglePane> list = new ArrayList<RegisterSinglePane>();  //寄存器读写功能pane集合
+    public static List<RegisterSinglePane> list = new ArrayList<RegisterSinglePane>();  //寄存器读写功能pane集合
     int registerPaneQuantity = 8;  //寄存器读写功能数量
 
     RegisterLabelPane registerLabelPane = new RegisterLabelPane();  //寄存器只读取功能pane
@@ -52,7 +52,7 @@ public class RegistersPane extends VBox {
         setSpacing(2);  //设置上下间距
         //setStyle("-fx-background-color: #878787;"+ "-fx-background-radius: 5");
         getChildren().addAll(list);
-        getChildren().add(registerLabelPane);
+        getChildren().add(registerLabelPane);  //只读取功能pane
 
         label = (Label) registerLabelPane.getAnchorPane().lookup("#LabelRegisterName");  //寄存器只读取功能pane设置
         label.setText(properties.getProperty("RegisterJustReadName1"));

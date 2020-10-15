@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
+   <effect>
+      <Blend />
+   </effect>
+   <children>
+      <MenuBar id="SettingMenuBar" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <menus>
+          <Menu id="SettingRegisterMenu" mnemonicParsing="false" text="寄存器设置">
+            <items>
+                <MenuItem id="SettingRegisterAddressMenuItem" mnemonicParsing="false" text="寄存器地址设置" />
+              <MenuItem id="SettingRegisterAddressMenuItem" mnemonicParsing="false" text="寄存器单位设置" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="线圈设置">
+            <items>
+              <MenuItem mnemonicParsing="false" text="线圈地址设置" />
+                  <MenuItem mnemonicParsing="false" text="线圈功能设置" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="权限">
+            <items>
+              <MenuItem mnemonicParsing="false" text="登入" />
+                  <MenuItem mnemonicParsing="false" text="退出" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </children>
+</AnchorPane>

@@ -2,10 +2,10 @@ package com.TiNg.pane.coils;
 
 import com.TiNg.datatreat.Modbus;
 import com.TiNg.pane.COMConnect;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
@@ -21,35 +21,64 @@ public class CoilSinglePane extends AnchorPane {
     int coilsReadAddress;
     Modbus modbus = COMConnect.modbus;
     Button button;
-    int i;
+    int i;  //序号
+    Boolean booleanCoilModeTransform;
+    boolean[] b;  //临时读取寄存
 
 
     public CoilSinglePane() {
-        fxmlLoader.setLocation(url);  //加载fxml文件
-
-        URL cssURL = this.getClass().getClassLoader().getResource("styles/ButtonStyles.css");  //加载css文件
-        this.getStylesheets().add(cssURL.toExternalForm());
-
         try {
+            fxmlLoader.setLocation(url);  //加载fxml文件
             anchorPane = fxmlLoader.load();
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        URL cssURL = this.getClass().getClassLoader().getResource("styles/ButtonStyles.css");  //加载css文件
+        this.getStylesheets().add(cssURL.toExternalForm());
+
         getChildren().add(anchorPane);
 
         button = (Button) anchorPane.lookup("#ButtonCoil");  //拿到button
 
-        button.setOnAction(new EventHandler<ActionEvent>() {
+        button.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
-            public void handle(ActionEvent event) {
+            public void handle(MouseEvent event) {
                 try {
-                    boolean[] b = modbus.ModbusreadCoils(1, coilsWriteAddress, 1);
-                    if (b[0]) {
-                        modbus.ModbuswritefalseMultipleCoils(1, coilsWriteAddress);
-                    } else {
-                        modbus.ModbuswritetrueMultipleCoils(1, coilsWriteAddress);
+
+                    if (!booleanCoilModeTransform) {
+                        b = modbus.ModbusreadCoils(1, coilsWriteAddress, 1);
+                        if (b[0]) {
+                            modbus.ModbuswritefalseMultipleCoils(1, coilsWriteAddress);
+                        } else {
+                            modbus.ModbuswritetrueMultipleCoils(1, coilsWriteAddress);
+                        }
                     }
-                } catch (Exception e1) {
+                } catch (Exception e) {
+
+                }
+            }
+        });
+
+        button.setOnMouseReleased(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                try {
+                    if (!booleanCoilModeTransform) {
+                        if (b[0]) {
+                            modbus.ModbuswritetrueMultipleCoils(1, coilsWriteAddress);
+                        } else {
+                            modbus.ModbuswritefalseMultipleCoils(1, coilsWriteAddress);
+                        }
+                    } else {
+                        b = modbus.ModbusreadCoils(1, coilsWriteAddress, 1);
+                        if (b[0]) {
+                            modbus.ModbuswritefalseMultipleCoils(1, coilsWriteAddress);
+                        } else {
+                            modbus.ModbuswritetrueMultipleCoils(1, coilsWriteAddress);
+                        }
+                    }
+                } catch (Exception e) {
 
                 }
             }
@@ -82,12 +111,19 @@ public class CoilSinglePane extends AnchorPane {
         return button;
     }
 
-
     public int getI() {
         return i;
     }
 
     public void setI(int i) {
         this.i = i;
+    }
+
+    public Boolean getBooleanCoilModeTransform() {
+        return booleanCoilModeTransform;
+    }
+
+    public void setBooleanCoilModeTransform(Boolean booleanCoilModeTransform) {
+        this.booleanCoilModeTransform = booleanCoilModeTransform;
     }
 }

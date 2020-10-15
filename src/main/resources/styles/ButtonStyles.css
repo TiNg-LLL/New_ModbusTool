@@ -53,10 +53,10 @@
 /* coilButtonFalse false状态------------------------------------*/
 #coilButtonFalse {
     -fx-color: #000000;
-    -fx-background-color: linear-gradient(to bottom, #b6b6b6 0%, #7f7f7f 3%, #717171 35%, #424242 97%, #424242 100%);
+    -fx-background-color: linear-gradient(to bottom, #b6b6b6 0%, #7f7f7f 3%, #717171 35%, #5c5c5c 97%, #424242 100%);
     -fx-font-family: 'Microsoft YaHei', sans-serif;
     -fx-cursor: pointer;
-    -fx-font-size: 14px;
+    -fx-font-size: 15px;
     -fx-opacity: 0.9;
 }
 
@@ -70,7 +70,7 @@
     -fx-opacity: 1;
     -fx-spacing: 10px;
     -fx-start-margin: 10px;
-    -fx-background-color: linear-gradient(to bottom, #b6b6b6 0%, #7f7f7f 3%, #717171 35%, #424242 97%, #424242 100%);
+    -fx-background-color: linear-gradient(to bottom, #b6b6b6 0%, #7f7f7f 3%, #717171 35%, #5c5c5c 97%, #424242 100%);
     -fx-font-family: 'Microsoft YaHei', sans-serif;
     -fx-cursor: hand;
 }
@@ -81,7 +81,7 @@
     -fx-background-color: linear-gradient(to bottom, #87ff3a 0%, #87ff46 3%, #33fa06 35%, #26ff00 97%, #26ff00 100%);
     -fx-font-family: 'Microsoft YaHei', sans-serif;
     -fx-cursor: pointer;
-    -fx-font-size: 14px;
+    -fx-font-size: 15px;
     -fx-opacity: 0.9;
 }
 

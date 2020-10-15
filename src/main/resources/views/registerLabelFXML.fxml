@@ -7,13 +7,13 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-radius: 5; -fx-background-color: #a0a0a0;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-radius: 5; -fx-background-color: #575757;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <HBox alignment="CENTER" spacing="5.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+      <HBox alignment="CENTER" spacing="5.0" AnchorPane.bottomAnchor="3.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="3.0">
          <children>
             <AnchorPane maxWidth="90.0" nodeOrientation="RIGHT_TO_LEFT" prefWidth="90.0">
                <children>
-                  <Label id="LabelRegisterName" layoutX="-8.0" maxWidth="120.0" text="Label测试">
+                  <Label id="LabelRegisterName" layoutX="-5.0" maxWidth="120.0" text="Label测试" textFill="WHITE">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -22,16 +22,16 @@
             </AnchorPane>
             <AnchorPane nodeOrientation="RIGHT_TO_LEFT" prefWidth="10.0">
                <children>
-                  <Label layoutX="18.0" layoutY="-1.0" text="：">
+                  <Label layoutX="-6.0" layoutY="-1.0" text="：" textFill="WHITE">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Label>
                </children>
             </AnchorPane>
-            <AnchorPane maxWidth="70.0" prefWidth="70.0">
+            <AnchorPane>
                <children>
-                  <Label id="LabelRegisterValue" layoutX="-22.0" layoutY="1.0" text="123467.1">
+                  <Label id="LabelRegisterValue" layoutX="1.0" layoutY="1.0" text="123467.1" textFill="WHITE" AnchorPane.rightAnchor="10.0">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -40,16 +40,6 @@
                <HBox.margin>
                   <Insets />
                </HBox.margin>
-               <effect>
-                  <Lighting diffuseConstant="0.0" specularConstant="0.0" specularExponent="0.0" surfaceScale="0.0">
-                     <bumpInput>
-                        <Shadow />
-                     </bumpInput>
-                     <light>
-                        <Light.Distant color="BLACK" />
-                     </light>
-                  </Lighting>
-               </effect>
             </AnchorPane>
          </children>
       </HBox>

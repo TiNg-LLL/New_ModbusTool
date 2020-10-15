@@ -31,16 +31,16 @@ public class RegisterSinglePane extends AnchorPane {
     Boolean booleanRegisterDataToMM;  //是否转换为mm单位
 
     public RegisterSinglePane() {
-        fxmlLoader.setLocation(url);  //加载fxml文件
-
-        URL cssURL = this.getClass().getClassLoader().getResource("styles/ButtonStyles.css");  //加载css文件
-        this.getStylesheets().add(cssURL.toExternalForm());
-
         try {
+            fxmlLoader.setLocation(url);  //加载fxml文件
             anchorPane = fxmlLoader.load();
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        URL cssURL = this.getClass().getClassLoader().getResource("styles/ButtonStyles.css");  //加载css文件
+        this.getStylesheets().add(cssURL.toExternalForm());
+
         getChildren().add(anchorPane);
 
         label = (Label) anchorPane.lookup("#LabelRegisterValue");  //拿到label

@@ -55,7 +55,13 @@ public class CoilsPane extends FlowPane {
             } else {
                 list.get(i).setCoilsReadAddress(dataTreat.coilAddressTransform(properties.getProperty("CoilReadAddressMXY" + (i + 1)), Integer.parseInt(properties.getProperty("CoilReadAddress" + (i + 1)))));
             }
+
+            list.get(i).setBooleanCoilModeTransform(Boolean.valueOf(properties.getProperty("CoilModeTransform" + (i + 1))));
         }
+
+        list.get(0).getAnchorPane().setStyle("-fx-background-color: #29bf12;" + "-fx-background-radius:5");
+        list.get(1).getAnchorPane().setStyle("-fx-background-color: #e72f17;" + "-fx-background-radius:5");
+        list.get(2).getAnchorPane().setStyle("-fx-background-color: #ffbe00;" + "-fx-background-radius:5");
 
         KeyFrame keyFrame = new KeyFrame(Duration.millis(1), "keyFrame", new EventHandler<ActionEvent>() {
             @Override

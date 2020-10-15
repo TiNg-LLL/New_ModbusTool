@@ -18,7 +18,7 @@
                      <children>
                         <Label id="LabelRegisterName" layoutX="-7.0" layoutY="2.0" maxWidth="120.0" text="Label测试">
                            <font>
-                              <Font size="14.0" />
+                              <Font name="System Bold Italic" size="14.0" />
                            </font></Label>
                      </children>
                   </AnchorPane>
@@ -37,16 +37,6 @@
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
-                     <effect>
-                        <Lighting diffuseConstant="0.0" specularConstant="0.0" specularExponent="0.0" surfaceScale="0.0">
-                           <bumpInput>
-                              <Shadow />
-                           </bumpInput>
-                           <light>
-                              <Light.Distant color="BLACK" />
-                           </light>
-                        </Lighting>
-                     </effect>
                   </AnchorPane>
                </children>
                <padding>
