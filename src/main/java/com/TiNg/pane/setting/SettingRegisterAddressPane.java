@@ -1,6 +1,7 @@
 package com.TiNg.pane.setting;
 
 import com.TiNg.pane.registers.RegistersPane;
+import javafx.geometry.Insets;
 import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ public class SettingRegisterAddressPane extends VBox {
         }
 
         setSpacing(5);  //设置上下间距
+        setPadding(new Insets(10,20,10,20));
         //setStyle("-fx-background-color: #878787;"+ "-fx-background-radius: 5");
 
         settingRegisterAddressSinglePane = new SettingRegisterAddressSinglePane(RegistersPane.registerLabelPane);  //寄存器只读地址修改功能pane

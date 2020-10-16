@@ -22,7 +22,7 @@ public class Modbus {
     //连接
     public void ModbusConnect(String comName, Integer baudrate, Integer dataBits, Integer stopBits, String EvenODD) throws Exception {
         SerialUtils.setSerialPortFactory(new SerialPortFactoryJSerialComm());
-        com.intelligt.modbus.jlibmodbus.Modbus.setLogLevel(com.intelligt.modbus.jlibmodbus.Modbus.LogLevel.LEVEL_DEBUG);
+        com.intelligt.modbus.jlibmodbus.Modbus.setLogLevel(com.intelligt.modbus.jlibmodbus.Modbus.LogLevel.LEVEL_WARNINGS);
         sp.setDevice(comName);
         sp.setBaudRate(com.intelligt.modbus.jlibmodbus.serial.SerialPort.BaudRate.getBaudRate(baudrate));
         sp.setDataBits(dataBits);

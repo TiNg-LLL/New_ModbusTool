@@ -2,6 +2,7 @@ package com.TiNg.pane;
 
 import com.TiNg.datatreat.COMDate;
 import com.TiNg.datatreat.Modbus;
+import com.TiNg.mainLauncher.MainLauncher;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -17,7 +18,9 @@ import javafx.scene.text.Font;
 
 import java.io.*;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 
@@ -37,6 +40,7 @@ public class COMConnect extends HBox {
     Properties properties = new Properties();
     FileInputStream fileInputStream;
     BufferedReader bufferedReader;
+    SimpleDateFormat df = MainLauncher.df;
 
 
     public COMConnect(int width) {
@@ -115,6 +119,7 @@ public class COMConnect extends HBox {
                     int dataBits = Integer.parseInt(comboBoxDataBits.getValue());
                     int stopBits = Integer.parseInt(comboBoxStopBits.getValue());
                     String evenODD = comboBoxEvenODD.getValue();
+                    System.out.println(df.format(new Date()) + " " + "尝试连接");
                     System.out.println(string);
                     System.out.println(baudrate);
                     System.out.println(dataBits);
@@ -126,7 +131,7 @@ public class COMConnect extends HBox {
                         e.printStackTrace();
                     }
                     if (modbus.ModbusisConnected()) {
-                        System.out.println("COM端口已连接");
+                        System.out.println(df.format(new Date()) + " " + "COM端口已连接");
                         comboBoxCOM.setDisable(true);
                         comboBoxBaudrate.setDisable(true);
                         comboBoxDataBits.setDisable(true);
@@ -138,7 +143,7 @@ public class COMConnect extends HBox {
                     }
                 } else {
                     modbus.ModbusDisconnect();
-                    System.out.println("COM端口已断开");
+                    System.out.println(df.format(new Date()) + " " + "COM端口已断开");
                     comboBoxCOM.setDisable(false);
                     comboBoxBaudrate.setDisable(false);
                     comboBoxDataBits.setDisable(false);
