@@ -13,6 +13,7 @@ import javafx.scene.layout.AnchorPane;
 
 import java.io.*;
 import java.net.URL;
+import java.util.Properties;
 
 public class RegisterSinglePane extends AnchorPane {
 
@@ -20,10 +21,13 @@ public class RegisterSinglePane extends AnchorPane {
     URL url = fxmlLoader.getClassLoader().getResource("views/registerPaneFXML.fxml");
     AnchorPane anchorPane;  //fxml加载
 
+    Properties properties = RegistersPane.properties;
+
     int registerWriteAddress;
     int registerReadAddress;
     Modbus modbus = COMConnect.modbus;
     DataTreat dataTreat = RegistersPane.dataTreat;
+    Label labelName;
     Label label;
     TextField textField;
     Button button;
@@ -43,7 +47,9 @@ public class RegisterSinglePane extends AnchorPane {
 
         getChildren().add(anchorPane);
 
-        label = (Label) anchorPane.lookup("#LabelRegisterValue");  //拿到label
+        labelName = (Label) anchorPane.lookup("#LabelRegisterName");  //拿到名称label
+
+        label = (Label) anchorPane.lookup("#LabelRegisterValue");  //拿到读取值label
 
         textField = (TextField) anchorPane.lookup("#TextFieldRegister");  //拿到textField
 
@@ -57,29 +63,29 @@ public class RegisterSinglePane extends AnchorPane {
                     float f1 = (float) ((f / 0.5 * 12 * 1000) / 10);
                     int a = (int) f1;
                     if (a < 32768) {
-                        modbus.ModbuswriteSingleRegister(1, registerWriteAddress, a);
-                        modbus.ModbuswriteSingleRegister(1, registerWriteAddress + 1, 0);
+                        modbus.ModbuswriteSingleRegister(1, dataTreat.registerAddressTransform(registerWriteAddress), a);
+                        modbus.ModbuswriteSingleRegister(1, dataTreat.registerAddressTransform(registerWriteAddress) + 1, 0);
                     } else {
                         if (a < 65536) {
-                            modbus.ModbuswriteSingleRegister(1, registerWriteAddress, a);
-                            modbus.ModbuswriteSingleRegister(1, registerWriteAddress + 1, 0);
+                            modbus.ModbuswriteSingleRegister(1, dataTreat.registerAddressTransform(registerWriteAddress), a);
+                            modbus.ModbuswriteSingleRegister(1, dataTreat.registerAddressTransform(registerWriteAddress) + 1, 0);
                         } else {
-                            modbus.ModbuswriteSingleRegister(1, registerWriteAddress, dataTreat.tenToBinary(a)[0]);
-                            modbus.ModbuswriteSingleRegister(1, registerWriteAddress + 1, dataTreat.tenToBinary(a)[1]);
+                            modbus.ModbuswriteSingleRegister(1, dataTreat.registerAddressTransform(registerWriteAddress), dataTreat.tenToBinary(a)[0]);
+                            modbus.ModbuswriteSingleRegister(1, dataTreat.registerAddressTransform(registerWriteAddress) + 1, dataTreat.tenToBinary(a)[1]);
                         }
                     }
                 } else {
                     int a = Integer.valueOf(textField.getText());
                     if (a < 32768) {
-                        modbus.ModbuswriteSingleRegister(1, registerWriteAddress, a);
-                        modbus.ModbuswriteSingleRegister(1, registerWriteAddress + 1, 0);
+                        modbus.ModbuswriteSingleRegister(1, dataTreat.registerAddressTransform(registerWriteAddress), a);
+                        modbus.ModbuswriteSingleRegister(1, dataTreat.registerAddressTransform(registerWriteAddress) + 1, 0);
                     } else {
                         if (a < 65536) {
-                            modbus.ModbuswriteSingleRegister(1, registerWriteAddress, a);
-                            modbus.ModbuswriteSingleRegister(1, registerWriteAddress + 1, 0);
+                            modbus.ModbuswriteSingleRegister(1, dataTreat.registerAddressTransform(registerWriteAddress), a);
+                            modbus.ModbuswriteSingleRegister(1, dataTreat.registerAddressTransform(registerWriteAddress) + 1, 0);
                         } else {
-                            modbus.ModbuswriteSingleRegister(1, registerWriteAddress, dataTreat.tenToBinary(a)[0]);
-                            modbus.ModbuswriteSingleRegister(1, registerWriteAddress + 1, dataTreat.tenToBinary(a)[1]);
+                            modbus.ModbuswriteSingleRegister(1, dataTreat.registerAddressTransform(registerWriteAddress), dataTreat.tenToBinary(a)[0]);
+                            modbus.ModbuswriteSingleRegister(1, dataTreat.registerAddressTransform(registerWriteAddress) + 1, dataTreat.tenToBinary(a)[1]);
                         }
                     }
                 }
@@ -111,6 +117,10 @@ public class RegisterSinglePane extends AnchorPane {
 
     public Label getLabel() {
         return label;
+    }
+
+    public Label getLabelName() {
+        return labelName;
     }
 
     public int getI() {

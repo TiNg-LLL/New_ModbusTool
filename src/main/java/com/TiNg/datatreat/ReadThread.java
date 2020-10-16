@@ -9,6 +9,7 @@ public class ReadThread extends Thread {
     RegistersPane registersPane = FirstWindow.registersPane;
     CoilsPane coilsPane = FirstWindow.coilsPane;
     Modbus modbus = COMConnect.modbus;
+    DataTreat dataTreat = RegistersPane.dataTreat;
 
 
     @Override
@@ -21,13 +22,13 @@ public class ReadThread extends Thread {
             if (modbus.ModbusisConnected()) {
                 try {
                     for (int i = 0; i < registersPane.getRegisterPaneQuantity(); i++) {
-                        registersPane.getListInt().set(i, modbus.ModbusreadHoldingRegisters(1, registersPane.getList().get(i).getRegisterReadAddress(), 2));
+                        registersPane.getListInt().set(i, modbus.ModbusreadHoldingRegisters(1, dataTreat.registerAddressTransform(registersPane.getList().get(i).getRegisterReadAddress()), 2));
                     }
 
-                    registersPane.getRegisterLabelPane().setI(modbus.ModbusreadHoldingRegisters(1,registersPane.getRegisterLabelPane().getRegisterReadAddress(),2));
+                    registersPane.getRegisterLabelPane().setI(modbus.ModbusreadHoldingRegisters(1, dataTreat.registerAddressTransform(registersPane.getRegisterLabelPane().getRegisterReadAddress()), 2));
 
                     for (int i = 0; i < coilsPane.getCoilsPaneQuantity(); i++) {
-                        coilsPane.getListBoolean().set(i, modbus.ModbusreadCoils(1, coilsPane.getList().get(i).getCoilsReadAddress(), 1));
+                        coilsPane.getListBoolean().set(i, modbus.ModbusreadCoils(1, dataTreat.registerAddressTransform(coilsPane.getList().get(i).getCoilsReadAddress()), 1));
                     }
                 } catch (Exception e) {
 

@@ -23,6 +23,9 @@ public class SettingPane extends AnchorPane {
     MenuItem registerAddressMenuItem;
     MenuItem registerDatatommMenuItem;
 
+    SettingRegisterAddressWindow settingRegisterAddressWindow = new SettingRegisterAddressWindow();
+    SettingRegisterDatatommWindow settingRegisterDatatommWindow = new SettingRegisterDatatommWindow();
+
     public SettingPane(int width) {
         setPrefWidth(width);
         setStyle("-fx-background-color:#b3b3b3");
@@ -47,7 +50,7 @@ public class SettingPane extends AnchorPane {
         registerAddressMenuItem.setOnAction(new EventHandler<ActionEvent>() {  //第一个按钮动作
             @Override
             public void handle(ActionEvent event) {
-                SettingRegisterAddressWindow settingRegisterAddressWindow = new SettingRegisterAddressWindow();
+                settingRegisterAddressWindow.getSettingRegisterAddressPane().textFieldFlash();
                 settingRegisterAddressWindow.show();
             }
         });
@@ -55,7 +58,7 @@ public class SettingPane extends AnchorPane {
         registerDatatommMenuItem.setOnAction(new EventHandler<ActionEvent>() {  //第二个按钮动作
             @Override
             public void handle(ActionEvent event) {
-                SettingRegisterDatatommWindow settingRegisterDatatommWindow = new SettingRegisterDatatommWindow();
+                settingRegisterDatatommWindow.getSettingRegisterDatatommPane().dataFlash();
                 settingRegisterDatatommWindow.show();
             }
         });

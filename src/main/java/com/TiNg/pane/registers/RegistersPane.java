@@ -19,9 +19,9 @@ import java.util.Properties;
 public class RegistersPane extends VBox {
 
     public static List<RegisterSinglePane> list = new ArrayList<RegisterSinglePane>();  //寄存器读写功能pane集合
-    int registerPaneQuantity = 8;  //寄存器读写功能数量
+    public static int registerPaneQuantity = 8;  //寄存器读写功能数量
 
-    RegisterLabelPane registerLabelPane = new RegisterLabelPane();  //寄存器只读取功能pane
+    public static RegisterLabelPane registerLabelPane = new RegisterLabelPane();  //寄存器只读取功能pane
 
     Timeline timeline = new Timeline();
     List<int[]> listInt = new ArrayList<int[]>();
@@ -49,26 +49,26 @@ public class RegistersPane extends VBox {
             list.get(i).setI(i);
             listInt.add(new int[2]);
         }
-        setSpacing(2);  //设置上下间距
+        setSpacing(5);  //设置上下间距
         //setStyle("-fx-background-color: #878787;"+ "-fx-background-radius: 5");
         getChildren().addAll(list);
         getChildren().add(registerLabelPane);  //只读取功能pane
 
         label = (Label) registerLabelPane.getAnchorPane().lookup("#LabelRegisterName");  //寄存器只读取功能pane设置
         label.setText(properties.getProperty("RegisterJustReadName1"));
-        registerLabelPane.setRegisterReadAddress(dataTreat.registerAddressTransform(Integer.parseInt(properties.getProperty("RegisterJustReadAddress1"))));
+        registerLabelPane.setRegisterReadAddress(Integer.parseInt(properties.getProperty("RegisterJustReadAddress1")));
         registerLabelPane.setBooleanRegisterDataToMM(Boolean.valueOf(properties.getProperty("RegisterJustReadDataToMM1")));
 
         for (int i = 0; i < registerPaneQuantity; i++) {  //读写功能初始设置
             label = (Label) list.get(i).getAnchorPane().lookup("#LabelRegisterName");  //拿到名称label
             label.setText(properties.getProperty("LabelRegisterName" + (i + 1)));  //设置名称
 
-            list.get(i).setRegisterWriteAddress(dataTreat.registerAddressTransform(Integer.parseInt(properties.getProperty("RegisterWriteAddress" + (i + 1)))));  //设置寄存器写入地址
+            list.get(i).setRegisterWriteAddress(Integer.parseInt(properties.getProperty("RegisterWriteAddress" + (i + 1))));  //设置寄存器写入地址
 
             if (Integer.parseInt(properties.getProperty("RegisterReadAddress" + (i + 1))) == 0) {  //设置寄存器读取地址
-                list.get(i).setRegisterReadAddress(dataTreat.registerAddressTransform(Integer.parseInt(properties.getProperty("RegisterWriteAddress" + (i + 1)))));
+                list.get(i).setRegisterReadAddress(Integer.parseInt(properties.getProperty("RegisterWriteAddress" + (i + 1))));
             } else {
-                list.get(i).setRegisterReadAddress(dataTreat.registerAddressTransform(Integer.parseInt(properties.getProperty("RegisterReadAddress" + (i + 1)))));
+                list.get(i).setRegisterReadAddress(Integer.parseInt(properties.getProperty("RegisterReadAddress" + (i + 1))));
             }
             list.get(i).setBooleanRegisterDataToMM(Boolean.valueOf(properties.getProperty("RegisterDataToMM" + (i + 1))));  //设置是否转换为mm单位
         }

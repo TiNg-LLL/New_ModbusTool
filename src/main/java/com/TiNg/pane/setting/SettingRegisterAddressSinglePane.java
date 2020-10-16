@@ -1,6 +1,7 @@
 package com.TiNg.pane.setting;
 
 import com.TiNg.datatreat.DataTreat;
+import com.TiNg.pane.registers.RegisterLabelPane;
 import com.TiNg.pane.registers.RegisterSinglePane;
 import com.TiNg.pane.registers.RegistersPane;
 import javafx.event.ActionEvent;
@@ -29,6 +30,7 @@ public class SettingRegisterAddressSinglePane extends AnchorPane {
     Button buttonRead;
     int i;  //序号
     List<RegisterSinglePane> list = RegistersPane.list;
+    RegisterLabelPane registerLabelPane = RegistersPane.registerLabelPane;  //寄存器只读取功能pane
 
 
     public SettingRegisterAddressSinglePane() {
@@ -54,7 +56,8 @@ public class SettingRegisterAddressSinglePane extends AnchorPane {
             @Override
             public void handle(ActionEvent event) {
                 list.get(i).setRegisterWriteAddress(Integer.parseInt(textFieldWrite.getText()));
-                list.get(i).setRegisterReadAddress(Integer.parseInt(textFieldRead.getText()));
+                list.get(i).setRegisterReadAddress(Integer.parseInt(textFieldWrite.getText()));
+                textFieldRead.setText(textFieldWrite.getText());
             }
         });
 
@@ -64,5 +67,60 @@ public class SettingRegisterAddressSinglePane extends AnchorPane {
                 list.get(i).setRegisterReadAddress(Integer.parseInt(textFieldRead.getText()));
             }
         });
+    }
+
+    public SettingRegisterAddressSinglePane(RegisterLabelPane registerLabelPane) {
+        try {
+            fxmlLoader.setLocation(url);  //加载fxml文件
+            anchorPane = fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        getChildren().add(anchorPane);
+
+        label = (Label) anchorPane.lookup("#SettingLabelRegisterName");  //拿到label
+
+        label.setText(String.valueOf(registerLabelPane.getLabelName().getText()));
+
+        textFieldWrite = (TextField) anchorPane.lookup("#SettingTextFieldWriteRegister");  //拿到写入地址textField
+
+        textFieldRead = (TextField) anchorPane.lookup("#SettingTextFieldReadRegister");  //拿到读取地址textField
+
+        textFieldRead.setText(String.valueOf(registerLabelPane.getRegisterReadAddress()));
+
+        buttonWrite = (Button) anchorPane.lookup("#SettingButtonWriteRegister");  //拿到写入地址button
+
+        buttonRead = (Button) anchorPane.lookup("#SettingButtonReadRegister");  //拿到读取地址button
+
+        buttonWrite.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+            }
+        });
+
+        buttonRead.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                registerLabelPane.setRegisterReadAddress(Integer.valueOf(textFieldRead.getText()));
+            }
+        });
+    }
+
+    public void setI(int i) {
+        this.i = i;
+    }
+
+    public int getI() {
+        return i;
+    }
+
+    public Label getLabel() {
+        return label;
+    }
+
+    public void textFieldFlash() {
+        textFieldWrite.setText(String.valueOf(list.get(i).getRegisterWriteAddress()));
+        textFieldRead.setText(String.valueOf(list.get(i).getRegisterReadAddress()));
+        label.setText(list.get(i).getLabelName().getText());
     }
 }

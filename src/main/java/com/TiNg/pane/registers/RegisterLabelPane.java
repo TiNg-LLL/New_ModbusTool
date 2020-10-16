@@ -1,8 +1,5 @@
 package com.TiNg.pane.registers;
 
-import com.TiNg.datatreat.DataTreat;
-import com.TiNg.datatreat.Modbus;
-import com.TiNg.pane.COMConnect;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
@@ -16,6 +13,7 @@ public class RegisterLabelPane extends AnchorPane {
     AnchorPane anchorPane;  //fxml加载
 
     int registerReadAddress;
+    Label labelName;
     Label label;
     int[] i;  //读取的值
     Boolean booleanRegisterDataToMM;  //是否转换为mm单位
@@ -30,7 +28,9 @@ public class RegisterLabelPane extends AnchorPane {
         }
         getChildren().add(anchorPane);
 
-        label = (Label) anchorPane.lookup("#LabelRegisterValue");  //拿到label
+        labelName = (Label) anchorPane.lookup("#LabelRegisterName");  //拿到名称label
+
+        label = (Label) anchorPane.lookup("#LabelRegisterValue");  //拿到读取值label
     }
 
 
@@ -45,6 +45,10 @@ public class RegisterLabelPane extends AnchorPane {
 
     public void setRegisterReadAddress(int registerReadAddress) {
         this.registerReadAddress = registerReadAddress;
+    }
+
+    public Label getLabelName() {
+        return labelName;
     }
 
     public Label getLabel() {
