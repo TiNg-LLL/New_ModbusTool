@@ -18,7 +18,7 @@ import java.util.List;
 public class SettingRegisterDatatommSinglePane extends AnchorPane {
 
     FXMLLoader fxmlLoader = new FXMLLoader();
-    URL url = fxmlLoader.getClassLoader().getResource("views/settingRegisterDatatommPaneFXML.fxml");
+    URL url = fxmlLoader.getClassLoader().getResource("views/setting/settingRegisterDatatommPane.fxml");
     AnchorPane anchorPane;  //fxml加载
 
     DataTreat dataTreat = RegistersPane.dataTreat;

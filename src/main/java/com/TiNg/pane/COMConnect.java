@@ -120,11 +120,11 @@ public class COMConnect extends HBox {
                     int stopBits = Integer.parseInt(comboBoxStopBits.getValue());
                     String evenODD = comboBoxEvenODD.getValue();
                     System.out.println(df.format(new Date()) + " " + "尝试连接");
-                    System.out.println(string);
-                    System.out.println(baudrate);
-                    System.out.println(dataBits);
-                    System.out.println(stopBits);
-                    System.out.println(evenODD);
+                    System.out.println("端口：" + string);
+                    System.out.println("波特率：" + baudrate);
+                    System.out.println("数据位：" + dataBits);
+                    System.out.println("结束位：" + stopBits);
+                    System.out.println("奇偶校验：" + evenODD);
                     try {
                         modbus.ModbusConnect(string, baudrate, dataBits, stopBits, evenODD);
                     } catch (Exception e) {

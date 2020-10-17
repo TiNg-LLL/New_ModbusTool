@@ -58,7 +58,8 @@ public class COMDate {
         }
 
         for (int i = 0; i < portNames.length; i++) {
-            System.out.println(list.get(i));
+            System.out.print(list.get(i) + " ");
         }
+        System.out.println();
     }
 }

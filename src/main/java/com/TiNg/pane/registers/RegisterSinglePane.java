@@ -59,9 +59,9 @@ public class RegisterSinglePane extends AnchorPane {
             @Override
             public void handle(ActionEvent event) {
                 if (booleanRegisterDataToMM) {
-                    float f = Float.parseFloat(textField.getText());
-                    float f1 = (float) ((f / 0.5 * 12 * 1000) / 10);
-                    int a = (int) f1;
+                    Double f = Double.parseDouble(textField.getText());
+                    Double f1 = (((f / ((DataTreat.luoju) / 10)) * DataTreat.wulisubi * DataTreat.bujinxifen) / 10);
+                    int a = new Double(f1).intValue();
                     if (a < 32768) {
                         modbus.ModbuswriteSingleRegister(1, dataTreat.registerAddressTransform(registerWriteAddress), a);
                         modbus.ModbuswriteSingleRegister(1, dataTreat.registerAddressTransform(registerWriteAddress) + 1, 0);

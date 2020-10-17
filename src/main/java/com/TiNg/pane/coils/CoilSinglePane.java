@@ -1,7 +1,9 @@
 package com.TiNg.pane.coils;
 
+import com.TiNg.datatreat.DataTreat;
 import com.TiNg.datatreat.Modbus;
 import com.TiNg.pane.COMConnect;
+import com.TiNg.pane.registers.RegistersPane;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -19,7 +21,10 @@ public class CoilSinglePane extends AnchorPane {
 
     int coilsWriteAddress;
     int coilsReadAddress;
+    String coilWriteAddressMXY;
+    String coilReadAddressMXY;
     Modbus modbus = COMConnect.modbus;
+    DataTreat dataTreat = RegistersPane.dataTreat;
     Button button;
     int i;  //序号
     Boolean booleanCoilModeTransform;
@@ -47,11 +52,11 @@ public class CoilSinglePane extends AnchorPane {
                 try {
 
                     if (!booleanCoilModeTransform) {
-                        b = modbus.ModbusreadCoils(1, coilsWriteAddress, 1);
+                        b = modbus.ModbusreadCoils(1, dataTreat.coilAddressTransform(coilWriteAddressMXY,coilsWriteAddress), 1);
                         if (b[0]) {
-                            modbus.ModbuswritefalseMultipleCoils(1, coilsWriteAddress);
+                            modbus.ModbuswritefalseMultipleCoils(1, dataTreat.coilAddressTransform(coilWriteAddressMXY,coilsWriteAddress));
                         } else {
-                            modbus.ModbuswritetrueMultipleCoils(1, coilsWriteAddress);
+                            modbus.ModbuswritetrueMultipleCoils(1, dataTreat.coilAddressTransform(coilWriteAddressMXY,coilsWriteAddress));
                         }
                     }
                 } catch (Exception e) {
@@ -66,16 +71,16 @@ public class CoilSinglePane extends AnchorPane {
                 try {
                     if (!booleanCoilModeTransform) {
                         if (b[0]) {
-                            modbus.ModbuswritetrueMultipleCoils(1, coilsWriteAddress);
+                            modbus.ModbuswritetrueMultipleCoils(1, dataTreat.coilAddressTransform(coilWriteAddressMXY,coilsWriteAddress));
                         } else {
-                            modbus.ModbuswritefalseMultipleCoils(1, coilsWriteAddress);
+                            modbus.ModbuswritefalseMultipleCoils(1, dataTreat.coilAddressTransform(coilWriteAddressMXY,coilsWriteAddress));
                         }
                     } else {
-                        b = modbus.ModbusreadCoils(1, coilsWriteAddress, 1);
+                        b = modbus.ModbusreadCoils(1, dataTreat.coilAddressTransform(coilWriteAddressMXY,coilsWriteAddress), 1);
                         if (b[0]) {
-                            modbus.ModbuswritefalseMultipleCoils(1, coilsWriteAddress);
+                            modbus.ModbuswritefalseMultipleCoils(1, dataTreat.coilAddressTransform(coilWriteAddressMXY,coilsWriteAddress));
                         } else {
-                            modbus.ModbuswritetrueMultipleCoils(1, coilsWriteAddress);
+                            modbus.ModbuswritetrueMultipleCoils(1, dataTreat.coilAddressTransform(coilWriteAddressMXY,coilsWriteAddress));
                         }
                     }
                 } catch (Exception e) {
@@ -125,5 +130,21 @@ public class CoilSinglePane extends AnchorPane {
 
     public void setBooleanCoilModeTransform(Boolean booleanCoilModeTransform) {
         this.booleanCoilModeTransform = booleanCoilModeTransform;
+    }
+
+    public String getCoilWriteAddressMXY() {
+        return coilWriteAddressMXY;
+    }
+
+    public String getCoilReadAddressMXY() {
+        return coilReadAddressMXY;
+    }
+
+    public void setCoilWriteAddressMXY(String coilWriteAddressMXY) {
+        this.coilWriteAddressMXY = coilWriteAddressMXY;
+    }
+
+    public void setCoilReadAddressMXY(String coilReadAddressMXY) {
+        this.coilReadAddressMXY = coilReadAddressMXY;
     }
 }

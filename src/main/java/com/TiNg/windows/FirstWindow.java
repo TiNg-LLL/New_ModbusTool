@@ -4,7 +4,6 @@ import com.TiNg.datatreat.ReadThread;
 import com.TiNg.pane.COMConnect;
 import com.TiNg.pane.SettingPane;
 import com.TiNg.pane.coils.CoilsPane;
-import com.TiNg.pane.registers.RegisterLabelPane;
 import com.TiNg.pane.registers.RegistersPane;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -49,6 +48,8 @@ public class FirstWindow extends Stage {
 
         ReadThread readThread = new ReadThread();  //modbus读取单线程
         readThread.start();
+
+
 
         show();
     }

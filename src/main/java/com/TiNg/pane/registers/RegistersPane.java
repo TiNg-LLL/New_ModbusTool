@@ -27,11 +27,12 @@ public class RegistersPane extends VBox {
     List<int[]> listInt = new ArrayList<int[]>();
     Label label;
     Modbus modbus = COMConnect.modbus;
-    public static DataTreat dataTreat = new DataTreat();
 
     public static Properties properties = new Properties();
     FileInputStream fileInputStream;
     BufferedReader bufferedReader;
+
+    public static DataTreat dataTreat = new DataTreat();
 
     public RegistersPane() {
         try {

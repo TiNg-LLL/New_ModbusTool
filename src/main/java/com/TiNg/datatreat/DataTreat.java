@@ -1,11 +1,37 @@
 package com.TiNg.datatreat;
 
-import java.math.BigDecimal;
+import java.io.*;
+import java.util.Properties;
 
 public class DataTreat {
     int coilAddress;
     int registerAddress;
-    BigDecimal bigDecimal;
+
+    Properties properties = new Properties();
+    FileInputStream fileInputStream;
+    BufferedReader bufferedReader;
+
+    public static Double bujinxifen;
+    public static Double wulisubi;
+    public static Double luoju;
+
+    public DataTreat() {
+        try {
+            fileInputStream = new FileInputStream("src/main/resources/address.properties");  //properties文件设置
+            bufferedReader = new BufferedReader(new InputStreamReader(fileInputStream));
+            properties.load(bufferedReader);
+            bujinxifen = Double.parseDouble(properties.getProperty("bujinxifen"));
+            wulisubi = Double.parseDouble(properties.getProperty("wulisubi"));
+            luoju = Double.parseDouble(properties.getProperty("luoju"));
+            System.out.println("步进细分" + bujinxifen);
+            System.out.println("物理速比" + wulisubi);
+            System.out.println("螺距" + luoju);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public int[] tenToBinary(int i) {  //寄存器写入转换
         String s = Integer.toBinaryString(i);
@@ -38,7 +64,7 @@ public class DataTreat {
         int i2 = Integer.valueOf(s2, 2);
         //System.out.println(i2);
         double i4 = i2;
-        double i3 = (i4 * 5 / 12 / 1000);  //速比脉冲数
+        double i3 = (i4 * luoju / wulisubi / bujinxifen);  //速比脉冲数
         i3 = (double) (Math.round(i3 * 100)) / 100;  //保留两位小数
         return i3;
     }

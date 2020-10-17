@@ -19,7 +19,7 @@ import java.util.List;
 public class SettingRegisterAddressSinglePane extends AnchorPane {
 
     FXMLLoader fxmlLoader = new FXMLLoader();
-    URL url = fxmlLoader.getClassLoader().getResource("views/settingRegisterAddressPaneFXML.fxml");
+    URL url = fxmlLoader.getClassLoader().getResource("views/setting/settingRegisterAddressPane.fxml");
     AnchorPane anchorPane;  //fxml加载
 
     DataTreat dataTreat = RegistersPane.dataTreat;
