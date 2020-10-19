@@ -38,3 +38,8 @@ V0.0.8
 1、实现线圈地址修改功能；  
 2、实现线圈点动切换转换功能；  
 3、待实现将地址等信息保存本地功能；
+
+V0.0.9  
+1、加入窗口图标；  
+2、public static DataTreat在FirstWindow下；  
+3、public static properties在DataTreat下；

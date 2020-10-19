@@ -13,7 +13,12 @@ public class MainLauncher extends Application {
     public static SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     public static FirstWindow firstWindow;
 
-    @Override
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+
+
     public void start(Stage primaryStage) throws Exception {
         firstWindow = new FirstWindow();
         SettingPane.settingRegisterAddressWindow.initOwner(MainLauncher.firstWindow);

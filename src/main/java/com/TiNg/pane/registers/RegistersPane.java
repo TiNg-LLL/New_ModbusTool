@@ -3,6 +3,7 @@ package com.TiNg.pane.registers;
 import com.TiNg.datatreat.DataTreat;
 import com.TiNg.datatreat.Modbus;
 import com.TiNg.pane.COMConnect;
+import com.TiNg.windows.FirstWindow;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -11,7 +12,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
-import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -28,22 +28,12 @@ public class RegistersPane extends VBox {
     Label label;
     Modbus modbus = COMConnect.modbus;
 
-    public static Properties properties = new Properties();
-    FileInputStream fileInputStream;
-    BufferedReader bufferedReader;
+    Properties properties = DataTreat.properties;
 
-    public static DataTreat dataTreat = new DataTreat();
+    DataTreat dataTreat = FirstWindow.dataTreat;
 
     public RegistersPane() {
-        try {
-            fileInputStream = new FileInputStream("src/main/resources/address.properties");  //properties文件设置
-            bufferedReader = new BufferedReader(new InputStreamReader(fileInputStream));
-            properties.load(bufferedReader);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
 
         for (int i = 0; i < registerPaneQuantity; i++) {
             list.add(new RegisterSinglePane());

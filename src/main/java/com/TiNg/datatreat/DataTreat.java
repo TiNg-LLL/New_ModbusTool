@@ -7,7 +7,7 @@ public class DataTreat {
     int coilAddress;
     int registerAddress;
 
-    Properties properties = new Properties();
+    public static Properties properties = new Properties();
     FileInputStream fileInputStream;
     BufferedReader bufferedReader;
 

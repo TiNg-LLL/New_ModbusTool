@@ -4,6 +4,7 @@ import com.TiNg.datatreat.DataTreat;
 import com.TiNg.pane.registers.RegisterLabelPane;
 import com.TiNg.pane.registers.RegisterSinglePane;
 import com.TiNg.pane.registers.RegistersPane;
+import com.TiNg.windows.FirstWindow;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -22,7 +23,7 @@ public class SettingRegisterAddressSinglePane extends AnchorPane {
     URL url = fxmlLoader.getClassLoader().getResource("views/setting/settingRegisterAddressPane.fxml");
     AnchorPane anchorPane;  //fxml加载
 
-    DataTreat dataTreat = RegistersPane.dataTreat;
+    DataTreat dataTreat = FirstWindow.dataTreat;
     Label label;
     TextField textFieldWrite;
     TextField textFieldRead;

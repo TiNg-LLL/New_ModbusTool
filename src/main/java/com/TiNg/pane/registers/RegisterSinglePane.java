@@ -3,6 +3,7 @@ package com.TiNg.pane.registers;
 import com.TiNg.datatreat.DataTreat;
 import com.TiNg.datatreat.Modbus;
 import com.TiNg.pane.COMConnect;
+import com.TiNg.windows.FirstWindow;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -21,12 +22,12 @@ public class RegisterSinglePane extends AnchorPane {
     URL url = fxmlLoader.getClassLoader().getResource("views/registerPaneFXML.fxml");
     AnchorPane anchorPane;  //fxml加载
 
-    Properties properties = RegistersPane.properties;
+    Properties properties = DataTreat.properties;
 
     int registerWriteAddress;
     int registerReadAddress;
     Modbus modbus = COMConnect.modbus;
-    DataTreat dataTreat = RegistersPane.dataTreat;
+    DataTreat dataTreat = FirstWindow.dataTreat;
     Label labelName;
     Label label;
     TextField textField;

@@ -9,7 +9,7 @@ public class ReadThread extends Thread {
     RegistersPane registersPane = FirstWindow.registersPane;
     CoilsPane coilsPane = FirstWindow.coilsPane;
     Modbus modbus = COMConnect.modbus;
-    DataTreat dataTreat = RegistersPane.dataTreat;
+    DataTreat dataTreat = FirstWindow.dataTreat;
 
 
     @Override

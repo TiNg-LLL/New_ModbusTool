@@ -2,6 +2,7 @@ package com.TiNg.windows;
 
 import com.TiNg.pane.setting.SettingCoilsAddressPane;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -15,6 +16,7 @@ public class SettingCoilsAddressWindow extends Stage {
 //        anchorPane.setStyle("-fx-background-color:#FFB6C1");
         setResizable(false);
         setAlwaysOnTop(true);
+        getIcons().add(new Image("/icon/gear-icon.png"));
         setScene(scene);
 
         anchorPane.getChildren().add(settingCoilsAddressPane);

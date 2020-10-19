@@ -4,6 +4,7 @@ import com.TiNg.datatreat.DataTreat;
 import com.TiNg.pane.registers.RegisterLabelPane;
 import com.TiNg.pane.registers.RegisterSinglePane;
 import com.TiNg.pane.registers.RegistersPane;
+import com.TiNg.windows.FirstWindow;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXMLLoader;
@@ -21,7 +22,7 @@ public class SettingRegisterDatatommSinglePane extends AnchorPane {
     URL url = fxmlLoader.getClassLoader().getResource("views/setting/settingRegisterDatatommPane.fxml");
     AnchorPane anchorPane;  //fxml加载
 
-    DataTreat dataTreat = RegistersPane.dataTreat;
+    DataTreat dataTreat = FirstWindow.dataTreat;
     Label label;
     CheckBox checkBoxDataRaw;
     CheckBox checkBoxDatatomm;

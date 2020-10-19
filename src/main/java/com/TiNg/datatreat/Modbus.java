@@ -1,6 +1,5 @@
 package com.TiNg.datatreat;
 
-import com.TiNg.pane.registers.RegistersPane;
 import com.intelligt.modbus.jlibmodbus.exception.ModbusIOException;
 import com.intelligt.modbus.jlibmodbus.exception.ModbusNumberException;
 import com.intelligt.modbus.jlibmodbus.exception.ModbusProtocolException;
@@ -17,7 +16,7 @@ public class Modbus {
 
     SerialParameters sp = new SerialParameters();
     ModbusMaster mm = null;
-    Properties properties = RegistersPane.properties;
+    Properties properties = DataTreat.properties;
 
     //连接
     public void ModbusConnect(String comName, Integer baudrate, Integer dataBits, Integer stopBits, String EvenODD) throws Exception {

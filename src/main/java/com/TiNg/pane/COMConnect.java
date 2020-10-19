@@ -1,6 +1,7 @@
 package com.TiNg.pane;
 
 import com.TiNg.datatreat.COMDate;
+import com.TiNg.datatreat.DataTreat;
 import com.TiNg.datatreat.Modbus;
 import com.TiNg.mainLauncher.MainLauncher;
 import javafx.collections.FXCollections;
@@ -16,7 +17,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
 
-import java.io.*;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -37,22 +37,11 @@ public class COMConnect extends HBox {
     public static Modbus modbus = new Modbus();
     List<String> dataBitsList = new ArrayList<String>();
     List<String> stopBitsList = new ArrayList<String>();
-    Properties properties = new Properties();
-    FileInputStream fileInputStream;
-    BufferedReader bufferedReader;
+    Properties properties = DataTreat.properties;
     SimpleDateFormat df = MainLauncher.df;
 
 
     public COMConnect(int width) {
-        try {
-            fileInputStream = new FileInputStream("src/main/resources/address.properties");  //properties文件设置
-            bufferedReader = new BufferedReader(new InputStreamReader(fileInputStream));
-            properties.load(bufferedReader);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
         setStyle("-fx-background-color:#b3b3b3");
         setPrefWidth(width);
@@ -106,7 +95,7 @@ public class COMConnect extends HBox {
         getChildren().add(separator);
 
         button.setText("连接");  //连接按钮
-        button.setFont(Font.font("微软雅体"));
+        button.setFont(Font.font("宋体"));
         URL cssURL = this.getClass().getClassLoader().getResource("styles/ButtonStyles.css");  //加载css文件
         this.getStylesheets().add(cssURL.toExternalForm());
         button.setId("connectBtn");

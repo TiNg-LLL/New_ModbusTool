@@ -4,6 +4,7 @@ import com.TiNg.datatreat.DataTreat;
 import com.TiNg.datatreat.Modbus;
 import com.TiNg.pane.COMConnect;
 import com.TiNg.pane.registers.RegistersPane;
+import com.TiNg.windows.FirstWindow;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -24,7 +25,7 @@ public class CoilSinglePane extends AnchorPane {
     String coilWriteAddressMXY;
     String coilReadAddressMXY;
     Modbus modbus = COMConnect.modbus;
-    DataTreat dataTreat = RegistersPane.dataTreat;
+    DataTreat dataTreat = FirstWindow.dataTreat;
     Button button;
     int i;  //序号
     Boolean booleanCoilModeTransform;

@@ -1,11 +1,13 @@
 package com.TiNg.windows;
 
+import com.TiNg.datatreat.DataTreat;
 import com.TiNg.datatreat.ReadThread;
 import com.TiNg.pane.COMConnect;
 import com.TiNg.pane.SettingPane;
 import com.TiNg.pane.coils.CoilsPane;
 import com.TiNg.pane.registers.RegistersPane;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -20,11 +22,14 @@ public class FirstWindow extends Stage {
     public static CoilsPane coilsPane;
     public static SettingPane settingPane;
 
+    public static DataTreat dataTreat = new DataTreat();
+
     public FirstWindow() {
         setTitle("New_ModbusTool -ver0.0.0");
         setWidth(windowWidth);
         setHeight(windowHeight);
         setResizable(false);
+        getIcons().add(new Image("/icon/tools-icon.png"));
         anchorPane.setStyle("-fx-background-color:#d7d7d7");
 
         setScene(scene);
@@ -48,8 +53,6 @@ public class FirstWindow extends Stage {
 
         ReadThread readThread = new ReadThread();  //modbus读取单线程
         readThread.start();
-
-
 
         show();
     }

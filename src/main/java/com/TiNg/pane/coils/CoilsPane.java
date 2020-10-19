@@ -4,6 +4,7 @@ import com.TiNg.datatreat.DataTreat;
 import com.TiNg.datatreat.Modbus;
 import com.TiNg.pane.COMConnect;
 import com.TiNg.pane.registers.RegistersPane;
+import com.TiNg.windows.FirstWindow;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -25,10 +26,10 @@ public class CoilsPane extends FlowPane {
     Timeline timeline = new Timeline();
     List<boolean[]> listBoolean = new ArrayList<boolean[]>();
     Modbus modbus = COMConnect.modbus;
-    DataTreat dataTreat = RegistersPane.dataTreat;
+    DataTreat dataTreat = FirstWindow.dataTreat;
     Button button;
 
-    Properties properties = RegistersPane.properties;
+    Properties properties = DataTreat.properties;
 
     public CoilsPane() {
 
