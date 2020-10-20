@@ -11,6 +11,10 @@ public class DataTreat {
     FileInputStream fileInputStream;
     BufferedReader bufferedReader;
 
+    public static Properties propertiesAuto = new Properties();
+    FileInputStream fileInputStreamAuto;
+    BufferedReader bufferedReaderAuto;
+
     public static Double bujinxifen;
     public static Double wulisubi;
     public static Double luoju;
@@ -18,8 +22,13 @@ public class DataTreat {
     public DataTreat() {
         try {
             fileInputStream = new FileInputStream("src/main/resources/address.properties");  //properties文件设置
-            bufferedReader = new BufferedReader(new InputStreamReader(fileInputStream));
+            bufferedReader = new BufferedReader(new InputStreamReader(fileInputStream, "UTF-8"));
             properties.load(bufferedReader);
+
+            fileInputStreamAuto = new FileInputStream("src/main/resources/Autoaddress.properties");  //properties文件设置
+            bufferedReaderAuto = new BufferedReader(new InputStreamReader(fileInputStreamAuto, "UTF-8"));
+            propertiesAuto.load(bufferedReaderAuto);
+
             bujinxifen = Double.parseDouble(properties.getProperty("bujinxifen"));
             wulisubi = Double.parseDouble(properties.getProperty("wulisubi"));
             luoju = Double.parseDouble(properties.getProperty("luoju"));
@@ -101,4 +110,6 @@ public class DataTreat {
 
         return this.coilAddress;
     }
+
+
 }

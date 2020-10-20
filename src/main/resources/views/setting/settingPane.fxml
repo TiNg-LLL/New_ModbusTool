@@ -30,6 +30,12 @@
                   <MenuItem mnemonicParsing="false" text="线圈功能设置" />
             </items>
           </Menu>
+            <Menu mnemonicParsing="false" text="数据处理">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="地址数据保存至本地" />
+                  <MenuItem mnemonicParsing="false" text="读取本地文件" />
+               </items>
+            </Menu>
           <Menu mnemonicParsing="false" text="权限">
             <items>
               <MenuItem mnemonicParsing="false" text="登入" />

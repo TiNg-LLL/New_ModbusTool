@@ -29,6 +29,7 @@ public class RegistersPane extends VBox {
     Modbus modbus = COMConnect.modbus;
 
     Properties properties = DataTreat.properties;
+    Properties propertiesAuto = DataTreat.propertiesAuto;
 
     DataTreat dataTreat = FirstWindow.dataTreat;
 
@@ -47,21 +48,21 @@ public class RegistersPane extends VBox {
 
         label = (Label) registerLabelPane.getAnchorPane().lookup("#LabelRegisterName");  //寄存器只读取功能pane设置
         label.setText(properties.getProperty("RegisterJustReadName1"));
-        registerLabelPane.setRegisterReadAddress(Integer.parseInt(properties.getProperty("RegisterJustReadAddress1")));
-        registerLabelPane.setBooleanRegisterDataToMM(Boolean.valueOf(properties.getProperty("RegisterJustReadDataToMM1")));
+        registerLabelPane.setRegisterReadAddress(Integer.parseInt(propertiesAuto.getProperty("RegisterJustReadAddress1")));
+        registerLabelPane.setBooleanRegisterDataToMM(Boolean.valueOf(propertiesAuto.getProperty("RegisterJustReadDataToMM1")));
 
         for (int i = 0; i < registerPaneQuantity; i++) {  //读写功能初始设置
             label = (Label) list.get(i).getAnchorPane().lookup("#LabelRegisterName");  //拿到名称label
             label.setText(properties.getProperty("LabelRegisterName" + (i + 1)));  //设置名称
 
-            list.get(i).setRegisterWriteAddress(Integer.parseInt(properties.getProperty("RegisterWriteAddress" + (i + 1))));  //设置寄存器写入地址
+            list.get(i).setRegisterWriteAddress(Integer.parseInt(propertiesAuto.getProperty("RegisterWriteAddress" + (i + 1))));  //设置寄存器写入地址
 
-            if (Integer.parseInt(properties.getProperty("RegisterReadAddress" + (i + 1))) == 0) {  //设置寄存器读取地址
-                list.get(i).setRegisterReadAddress(Integer.parseInt(properties.getProperty("RegisterWriteAddress" + (i + 1))));
+            if (Integer.parseInt(propertiesAuto.getProperty("RegisterReadAddress" + (i + 1))) == 0) {  //设置寄存器读取地址
+                list.get(i).setRegisterReadAddress(Integer.parseInt(propertiesAuto.getProperty("RegisterWriteAddress" + (i + 1))));
             } else {
-                list.get(i).setRegisterReadAddress(Integer.parseInt(properties.getProperty("RegisterReadAddress" + (i + 1))));
+                list.get(i).setRegisterReadAddress(Integer.parseInt(propertiesAuto.getProperty("RegisterReadAddress" + (i + 1))));
             }
-            list.get(i).setBooleanRegisterDataToMM(Boolean.valueOf(properties.getProperty("RegisterDataToMM" + (i + 1))));  //设置是否转换为mm单位
+            list.get(i).setBooleanRegisterDataToMM(Boolean.valueOf(propertiesAuto.getProperty("RegisterDataToMM" + (i + 1))));  //设置是否转换为mm单位
         }
 
         KeyFrame keyFrame = new KeyFrame(Duration.millis(1), "keyFrame", new EventHandler<ActionEvent>() {

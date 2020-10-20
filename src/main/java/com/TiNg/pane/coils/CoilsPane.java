@@ -3,7 +3,6 @@ package com.TiNg.pane.coils;
 import com.TiNg.datatreat.DataTreat;
 import com.TiNg.datatreat.Modbus;
 import com.TiNg.pane.COMConnect;
-import com.TiNg.pane.registers.RegistersPane;
 import com.TiNg.windows.FirstWindow;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -20,7 +19,7 @@ import java.util.Properties;
 
 public class CoilsPane extends FlowPane {
 
-    public static List<CoilSinglePane> list = new ArrayList<CoilSinglePane>();
+    public static List<CoilSinglePane> list = new ArrayList<CoilSinglePane>();  //线圈功能pane集合
     public static int coilsPaneQuantity = 12;  //线圈功能数量
 
     Timeline timeline = new Timeline();
@@ -30,6 +29,7 @@ public class CoilsPane extends FlowPane {
     Button button;
 
     Properties properties = DataTreat.properties;
+    Properties propertiesAuto = DataTreat.propertiesAuto;
 
     public CoilsPane() {
 
@@ -50,18 +50,18 @@ public class CoilsPane extends FlowPane {
             button = (Button) list.get(i).getAnchorPane().lookup("#ButtonCoil");  //拿到线圈名称label
             button.setText(properties.getProperty("ButtonCoilName" + (i + 1)));  //设置线圈名称
 
-            list.get(i).setCoilsWriteAddress(Integer.parseInt(properties.getProperty("CoilWriteAddress" + (i + 1))));  //设置线圈写入地址
-            list.get(i).setCoilWriteAddressMXY(properties.getProperty("CoilWriteAddressMXY" + (i + 1)));//设置线圈写入MXY
+            list.get(i).setCoilsWriteAddress(Integer.parseInt(propertiesAuto.getProperty("CoilWriteAddress" + (i + 1))));  //设置线圈写入地址
+            list.get(i).setCoilWriteAddressMXY(propertiesAuto.getProperty("CoilWriteAddressMXY" + (i + 1)));//设置线圈写入MXY
 
-            if (Integer.parseInt(properties.getProperty("CoilReadAddress" + (i + 1))) == 0) {  //设置线圈读取地址
-                list.get(i).setCoilsReadAddress(Integer.parseInt(properties.getProperty("CoilWriteAddress" + (i + 1))));
-                list.get(i).setCoilReadAddressMXY(properties.getProperty("CoilWriteAddressMXY" + (i + 1)));
+            if (Integer.parseInt(propertiesAuto.getProperty("CoilReadAddress" + (i + 1))) == 0) {  //设置线圈读取地址
+                list.get(i).setCoilsReadAddress(Integer.parseInt(propertiesAuto.getProperty("CoilWriteAddress" + (i + 1))));
+                list.get(i).setCoilReadAddressMXY(propertiesAuto.getProperty("CoilWriteAddressMXY" + (i + 1)));
             } else {
-                list.get(i).setCoilsReadAddress(Integer.parseInt(properties.getProperty("CoilReadAddress" + (i + 1))));
-                list.get(i).setCoilReadAddressMXY(properties.getProperty("CoilReadAddressMXY" + (i + 1)));
+                list.get(i).setCoilsReadAddress(Integer.parseInt(propertiesAuto.getProperty("CoilReadAddress" + (i + 1))));
+                list.get(i).setCoilReadAddressMXY(propertiesAuto.getProperty("CoilReadAddressMXY" + (i + 1)));
             }
 
-            list.get(i).setBooleanCoilModeTransform(Boolean.valueOf(properties.getProperty("CoilModeTransform" + (i + 1))));
+            list.get(i).setBooleanCoilModeTransform(Boolean.valueOf(propertiesAuto.getProperty("CoilModeTransform" + (i + 1))));  //设置线圈模式
         }
 
         list.get(0).getAnchorPane().setStyle("-fx-background-color: #29bf12;" + "-fx-background-radius:5");

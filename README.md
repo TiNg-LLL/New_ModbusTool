@@ -43,3 +43,11 @@ V0.0.9
 1、加入窗口图标；  
 2、public static DataTreat在FirstWindow下；  
 3、public static properties在DataTreat下；
+
+V0.1.0  
+1、完成在软件端将地址等信息保存至本地功能，在修改完地址后，保存至本地；  
+2、名称信息保存在address.properties内，并没有做软件端保存处理；  
+3、地址等信息，没有做从address.properties读取功能，此功能可能会出现使用上的麻烦，将所有地址等信息都只将在软件端做保存；  
+4、地址保存本地功能在SettingPane内的按钮实现；  
+5、在DataTreat内增加propertiesAuto；  
+6、待实现密码权限功能；
