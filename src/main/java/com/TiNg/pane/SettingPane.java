@@ -5,10 +5,7 @@ import com.TiNg.pane.coils.CoilsPane;
 import com.TiNg.pane.registers.RegisterLabelPane;
 import com.TiNg.pane.registers.RegisterSinglePane;
 import com.TiNg.pane.registers.RegistersPane;
-import com.TiNg.windows.SettingCoilsAddressWindow;
-import com.TiNg.windows.SettingCoilsModeTransformWindow;
-import com.TiNg.windows.SettingRegisterAddressWindow;
-import com.TiNg.windows.SettingRegisterDatatommWindow;
+import com.TiNg.windows.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -36,18 +33,23 @@ public class SettingPane extends AnchorPane {
     Menu registerMenu;
     Menu coilsMenu;
     Menu addressSaveMenu;
+    Menu adminMenu;
     MenuItem registerAddressMenuItem;
     MenuItem registerDatatommMenuItem;
     MenuItem coilsAddressMenuItem;
     MenuItem coilsModeTransformMenuItem;
     MenuItem addressSaveMenuItem;
     MenuItem addressReadMenuItem;
+    MenuItem adminInMenuItem;
+    MenuItem adminOutMenuItem;
 
     public static SettingRegisterAddressWindow settingRegisterAddressWindow = new SettingRegisterAddressWindow();
     public static SettingRegisterDatatommWindow settingRegisterDatatommWindow = new SettingRegisterDatatommWindow();
 
     public static SettingCoilsAddressWindow settingCoilsAddressWindow = new SettingCoilsAddressWindow();
     public static SettingCoilsModeTransformWindow settingCoilsModeTransformWindow = new SettingCoilsModeTransformWindow();
+
+    public static SettingAdminPasswordWindow settingAdminPasswordWindow = new SettingAdminPasswordWindow();
 
     public SettingPane(int width) {
         setPrefWidth(width);
@@ -65,6 +67,8 @@ public class SettingPane extends AnchorPane {
         menuBar = (MenuBar) anchorPane.lookup("#SettingMenuBar");  //拿到设置menuBar
 
         registerMenu = menuBar.getMenus().get(0);  //拿到menuBar下的第一个按钮 registerMenu
+
+        registerMenu.setDisable(true);
 
         registerAddressMenuItem = registerMenu.getItems().get(0);  //拿到registerMenu下的第一个按钮
 
@@ -88,6 +92,8 @@ public class SettingPane extends AnchorPane {
 
         coilsMenu = menuBar.getMenus().get(1);  //拿到menuBar下的第二个按钮 coilsMenu
 
+        coilsMenu.setDisable(true);
+
         coilsAddressMenuItem = coilsMenu.getItems().get(0);  //拿到coilsMenu下的第一个按钮
 
         coilsModeTransformMenuItem = coilsMenu.getItems().get(1);  //拿到coilsMenu下的第二个按钮
@@ -109,6 +115,8 @@ public class SettingPane extends AnchorPane {
         });
 
         addressSaveMenu = menuBar.getMenus().get(2);  //拿到menuBar下的第三个按钮 coilsMenu
+
+        addressSaveMenu.setDisable(true);
 
         addressSaveMenuItem = addressSaveMenu.getItems().get(0);  //拿到addressSaveMenu下的第一个按钮
 
@@ -155,5 +163,38 @@ public class SettingPane extends AnchorPane {
                 }
             }
         });
+
+        adminMenu = menuBar.getMenus().get(3);  //拿到menuBar下的第三个按钮 coilsMenu
+
+        adminInMenuItem = adminMenu.getItems().get(0);  //拿到addressSaveMenu下的第一个按钮
+
+        adminOutMenuItem = adminMenu.getItems().get(1);  //拿到addressSaveMenu下的第二个按钮
+
+        adminInMenuItem.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                settingAdminPasswordWindow = new SettingAdminPasswordWindow();
+                settingAdminPasswordWindow.show();
+            }
+        });
+
+        adminOutMenuItem.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                settingAdminPasswordWindow.getSettingAdminPasswordPane().adminOut();
+            }
+        });
+    }
+
+    public Menu getRegisterMenu() {
+        return registerMenu;
+    }
+
+    public Menu getCoilsMenu() {
+        return coilsMenu;
+    }
+
+    public Menu getAddressSaveMenu() {
+        return addressSaveMenu;
     }
 }

@@ -139,4 +139,8 @@ public class RegisterSinglePane extends AnchorPane {
     public void setBooleanRegisterDataToMM(Boolean booleanRegisterDataToMM) {
         this.booleanRegisterDataToMM = booleanRegisterDataToMM;
     }
+
+    public Button getButton() {
+        return button;
+    }
 }

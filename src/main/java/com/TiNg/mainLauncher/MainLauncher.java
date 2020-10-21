@@ -29,6 +29,8 @@ public class MainLauncher extends Application {
         SettingPane.settingCoilsAddressWindow.initModality(Modality.WINDOW_MODAL);
         SettingPane.settingCoilsModeTransformWindow.initOwner(MainLauncher.firstWindow);
         SettingPane.settingCoilsModeTransformWindow.initModality(Modality.WINDOW_MODAL);
+        SettingPane.settingAdminPasswordWindow.initOwner(MainLauncher.firstWindow);
+        SettingPane.settingAdminPasswordWindow.initModality(Modality.WINDOW_MODAL);
         System.out.println(df.format(new Date()) + " " + "主窗口已生成");
     }
 
