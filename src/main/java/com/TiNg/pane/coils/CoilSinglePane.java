@@ -3,6 +3,7 @@ package com.TiNg.pane.coils;
 import com.TiNg.datatreat.DataTreat;
 import com.TiNg.datatreat.Modbus;
 import com.TiNg.pane.COMConnect;
+import com.TiNg.pane.SettingPane;
 import com.TiNg.pane.registers.RegistersPane;
 import com.TiNg.windows.FirstWindow;
 import javafx.event.EventHandler;
@@ -51,17 +52,17 @@ public class CoilSinglePane extends AnchorPane {
             @Override
             public void handle(MouseEvent event) {
                 try {
-
                     if (!booleanCoilModeTransform) {
-                        b = modbus.ModbusreadCoils(1, dataTreat.coilAddressTransform(coilWriteAddressMXY,coilsWriteAddress), 1);
+                        b = modbus.ModbusreadCoils(1, dataTreat.coilAddressTransform(coilWriteAddressMXY, coilsWriteAddress), 1);
                         if (b[0]) {
-                            modbus.ModbuswritefalseMultipleCoils(1, dataTreat.coilAddressTransform(coilWriteAddressMXY,coilsWriteAddress));
+                            modbus.ModbuswritefalseMultipleCoils(1, dataTreat.coilAddressTransform(coilWriteAddressMXY, coilsWriteAddress));
                         } else {
-                            modbus.ModbuswritetrueMultipleCoils(1, dataTreat.coilAddressTransform(coilWriteAddressMXY,coilsWriteAddress));
+                            modbus.ModbuswritetrueMultipleCoils(1, dataTreat.coilAddressTransform(coilWriteAddressMXY, coilsWriteAddress));
                         }
+                        SettingPane.messageLabel.setText(button.getText());
                     }
                 } catch (Exception e) {
-
+                    SettingPane.messageLabel.setText(button.getText() + " : " + "错误");
                 }
             }
         });
@@ -72,20 +73,21 @@ public class CoilSinglePane extends AnchorPane {
                 try {
                     if (!booleanCoilModeTransform) {
                         if (b[0]) {
-                            modbus.ModbuswritetrueMultipleCoils(1, dataTreat.coilAddressTransform(coilWriteAddressMXY,coilsWriteAddress));
+                            modbus.ModbuswritetrueMultipleCoils(1, dataTreat.coilAddressTransform(coilWriteAddressMXY, coilsWriteAddress));
                         } else {
-                            modbus.ModbuswritefalseMultipleCoils(1, dataTreat.coilAddressTransform(coilWriteAddressMXY,coilsWriteAddress));
+                            modbus.ModbuswritefalseMultipleCoils(1, dataTreat.coilAddressTransform(coilWriteAddressMXY, coilsWriteAddress));
                         }
                     } else {
-                        b = modbus.ModbusreadCoils(1, dataTreat.coilAddressTransform(coilWriteAddressMXY,coilsWriteAddress), 1);
+                        b = modbus.ModbusreadCoils(1, dataTreat.coilAddressTransform(coilWriteAddressMXY, coilsWriteAddress), 1);
                         if (b[0]) {
-                            modbus.ModbuswritefalseMultipleCoils(1, dataTreat.coilAddressTransform(coilWriteAddressMXY,coilsWriteAddress));
+                            modbus.ModbuswritefalseMultipleCoils(1, dataTreat.coilAddressTransform(coilWriteAddressMXY, coilsWriteAddress));
                         } else {
-                            modbus.ModbuswritetrueMultipleCoils(1, dataTreat.coilAddressTransform(coilWriteAddressMXY,coilsWriteAddress));
+                            modbus.ModbuswritetrueMultipleCoils(1, dataTreat.coilAddressTransform(coilWriteAddressMXY, coilsWriteAddress));
                         }
+                        SettingPane.messageLabel.setText(button.getText());
                     }
                 } catch (Exception e) {
-
+                    SettingPane.messageLabel.setText(button.getText() + " : " + "错误");
                 }
             }
         });

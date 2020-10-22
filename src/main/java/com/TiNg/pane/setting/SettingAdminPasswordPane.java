@@ -1,6 +1,11 @@
 package com.TiNg.pane.setting;
 
+import com.TiNg.pane.COMConnect;
 import com.TiNg.pane.SettingPane;
+import com.TiNg.pane.coils.CoilSinglePane;
+import com.TiNg.pane.coils.CoilsPane;
+import com.TiNg.pane.registers.RegisterSinglePane;
+import com.TiNg.pane.registers.RegistersPane;
 import com.TiNg.windows.FirstWindow;
 import com.TiNg.windows.SettingAdminPasswordWindow;
 import javafx.event.ActionEvent;
@@ -12,6 +17,8 @@ import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Arrays;
+import java.util.List;
 
 public class SettingAdminPasswordPane extends AnchorPane {
 
@@ -22,7 +29,13 @@ public class SettingAdminPasswordPane extends AnchorPane {
     PasswordField passwordField;
     Button button;
 
+    COMConnect comConnect = FirstWindow.comConnect;
     SettingPane settingPane = FirstWindow.settingPane;
+    List<RegisterSinglePane> registersList = RegistersPane.list;
+    List<CoilSinglePane> coilsList = CoilsPane.list;
+
+    int[] i = {0, 1, 2, 3, 4};  //寄存器pane集合中需要权限的下标
+    int[] i1 = {8, 9, 10, 11};  //线圈pane集合中需要权限的下标
 
     public SettingAdminPasswordPane() {
         try {
@@ -38,23 +51,92 @@ public class SettingAdminPasswordPane extends AnchorPane {
 
         button = (Button) anchorPane.lookup("#SettingButtonAdminPassword");  //拿到密码登入按钮
 
+        comConnect.getComboBoxBaudrate().setDisable(true);
+        comConnect.getComboBoxDataBits().setDisable(true);
+        comConnect.getComboBoxStopBits().setDisable(true);
+        comConnect.getComboBoxEvenODD().setDisable(true);
+
+        for (int j = 0; j < registersList.size(); j++) {  //初始设置寄存器权限
+            if (Arrays.binarySearch(i, registersList.get(j).getI()) >= 0) {
+                registersList.get(j).getButton().setDisable(true);
+            }
+        }
+
+        for (int j = 0; j < coilsList.size(); j++) {  //初始设置线圈权限
+            if (Arrays.binarySearch(i1, coilsList.get(j).getI()) >= 0) {
+                coilsList.get(j).getButton().setDisable(true);
+            }
+        }
+
+        passwordField.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                SettingAdminPasswordPane.this.adminIn();
+            }
+        });
+
         button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                SettingAdminPasswordWindow settingAdminPasswordWindow = SettingPane.settingAdminPasswordWindow;
-                if (String.valueOf(passwordField.getText()).equals("123456")) {
-                    settingPane.getRegisterMenu().setDisable(false);
-                    settingPane.getCoilsMenu().setDisable(false);
-                    settingPane.getAddressSaveMenu().setDisable(false);
-                    settingAdminPasswordWindow.close();
-                }
+                SettingAdminPasswordPane.this.adminIn();
             }
         });
     }
 
+    public void adminIn() {
+        SettingAdminPasswordWindow settingAdminPasswordWindow = SettingPane.settingAdminPasswordWindow;
+        if (String.valueOf(passwordField.getText()).equals("0123")) {
+            comConnect.getComboBoxBaudrate().setDisable(false);
+            comConnect.getComboBoxDataBits().setDisable(false);
+            comConnect.getComboBoxStopBits().setDisable(false);
+            comConnect.getComboBoxEvenODD().setDisable(false);
+
+            settingPane.getRegisterMenu().setDisable(false);
+            settingPane.getCoilsMenu().setDisable(false);
+            settingPane.getAddressSaveMenu().setDisable(false);
+
+
+            for (int j = 0; j < registersList.size(); j++) {
+                if (Arrays.binarySearch(i, registersList.get(j).getI()) >= 0) {
+                    registersList.get(j).getButton().setDisable(false);
+                }
+            }
+            for (int j = 0; j < coilsList.size(); j++) {
+                if (Arrays.binarySearch(i1, coilsList.get(j).getI()) >= 0) {
+                    coilsList.get(j).getButton().setDisable(false);
+                }
+            }
+            settingAdminPasswordWindow.close();
+        }
+        if (String.valueOf(passwordField.getText()).equals("1")) {
+            comConnect.getComboBoxBaudrate().setDisable(false);
+            comConnect.getComboBoxDataBits().setDisable(false);
+            comConnect.getComboBoxStopBits().setDisable(false);
+            comConnect.getComboBoxEvenODD().setDisable(false);
+            settingAdminPasswordWindow.close();
+        }
+    }
+
     public void adminOut() {
+        comConnect.getComboBoxBaudrate().setDisable(true);
+        comConnect.getComboBoxDataBits().setDisable(true);
+        comConnect.getComboBoxStopBits().setDisable(true);
+        comConnect.getComboBoxEvenODD().setDisable(true);
+
         settingPane.getRegisterMenu().setDisable(true);
         settingPane.getCoilsMenu().setDisable(true);
         settingPane.getAddressSaveMenu().setDisable(true);
+
+        for (int j = 0; j < registersList.size(); j++) {
+            if (Arrays.binarySearch(i, registersList.get(j).getI()) >= 0) {
+                registersList.get(j).getButton().setDisable(true);
+            }
+        }
+
+        for (int j = 0; j < coilsList.size(); j++) {
+            if (Arrays.binarySearch(i1, coilsList.get(j).getI()) >= 0) {
+                coilsList.get(j).getButton().setDisable(true);
+            }
+        }
     }
 }

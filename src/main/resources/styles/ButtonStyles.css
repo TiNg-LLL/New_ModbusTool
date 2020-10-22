@@ -100,3 +100,13 @@
     -fx-font-family: 'Microsoft YaHei', sans-serif;
     -fx-cursor: hand;
 }
+
+/* coilButtonDisable 不可用状态------------------------------------*/
+#coilButtonDisable {
+    -fx-color: #212121;
+    -fx-background-color: #6d5d5d;
+    -fx-font-family: 'Microsoft YaHei', sans-serif;
+    -fx-cursor: pointer;
+    -fx-font-size: 15px;
+    -fx-opacity: 1;
+}

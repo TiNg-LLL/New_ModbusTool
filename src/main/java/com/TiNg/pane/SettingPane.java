@@ -9,6 +9,7 @@ import com.TiNg.windows.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
@@ -42,6 +43,7 @@ public class SettingPane extends AnchorPane {
     MenuItem addressReadMenuItem;
     MenuItem adminInMenuItem;
     MenuItem adminOutMenuItem;
+    public static Label messageLabel;
 
     public static SettingRegisterAddressWindow settingRegisterAddressWindow = new SettingRegisterAddressWindow();
     public static SettingRegisterDatatommWindow settingRegisterDatatommWindow = new SettingRegisterDatatommWindow();
@@ -63,6 +65,8 @@ public class SettingPane extends AnchorPane {
         }
 
         getChildren().add(anchorPane);
+
+        messageLabel = (Label) anchorPane.lookup("#MessageLabel");  //拿到信息label
 
         menuBar = (MenuBar) anchorPane.lookup("#SettingMenuBar");  //拿到设置menuBar
 
@@ -161,6 +165,7 @@ public class SettingPane extends AnchorPane {
                 } catch (Exception e) {
 
                 }
+                SettingPane.messageLabel.setText("数据已保存至本地");
             }
         });
 

@@ -77,15 +77,27 @@ public class CoilsPane extends FlowPane {
                             if (listBoolean.get(i)[0]) {
                                 list.get(i).getButton().setId("coilButtonTure");
                             } else {
-                                list.get(i).getButton().setId("coilButtonFalse");
+                                if (!list.get(i).getButton().isDisabled()) {
+                                    list.get(i).getButton().setId("coilButtonFalse");
+                                } else {
+                                    list.get(i).getButton().setId("coilButtonDisable");
+                                }
                             }
                         } catch (Exception e) {
-                            list.get(i).getButton().setId("coilButtonFalse");
+                            if (!list.get(i).getButton().isDisabled()) {
+                                list.get(i).getButton().setId("coilButtonFalse");
+                            } else {
+                                list.get(i).getButton().setId("coilButtonDisable");
+                            }
                         }
                     }
                 } else {
                     for (int i = 0; i < coilsPaneQuantity; i++) {
-                        list.get(i).getButton().setId("coilButtonFalse");
+                        if (!list.get(i).getButton().isDisabled()) {
+                            list.get(i).getButton().setId("coilButtonFalse");
+                        } else {
+                            list.get(i).getButton().setId("coilButtonDisable");
+                        }
                     }
                 }
             }

@@ -18,6 +18,7 @@ public class FirstWindow extends Stage {
     int windowWidth = 860;
     int windowHeight = 500;
 
+    public static COMConnect comConnect;
     public static RegistersPane registersPane;
     public static CoilsPane coilsPane;
     public static SettingPane settingPane;
@@ -34,7 +35,7 @@ public class FirstWindow extends Stage {
 
         setScene(scene);
 
-        COMConnect comConnect = new COMConnect(windowWidth);  //COM连接pane
+        comConnect = new COMConnect(windowWidth);  //COM连接pane
         anchorPane.getChildren().add(comConnect);
         AnchorPane.setBottomAnchor(comConnect, 0.0);
 

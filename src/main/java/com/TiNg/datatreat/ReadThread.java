@@ -22,12 +22,20 @@ public class ReadThread extends Thread {
             if (modbus.ModbusisConnected()) {
                 try {
                     for (int i = 0; i < registersPane.getRegisterPaneQuantity(); i++) {
+                        try {
+                            Thread.sleep(10);
+                        } catch (Exception e) {
+                        }
                         registersPane.getListInt().set(i, modbus.ModbusreadHoldingRegisters(1, dataTreat.registerAddressTransform(registersPane.getList().get(i).getRegisterReadAddress()), 2));
                     }
 
                     registersPane.getRegisterLabelPane().setI(modbus.ModbusreadHoldingRegisters(1, dataTreat.registerAddressTransform(registersPane.getRegisterLabelPane().getRegisterReadAddress()), 2));
 
                     for (int i = 0; i < coilsPane.getCoilsPaneQuantity(); i++) {
+                        try {
+                            Thread.sleep(10);
+                        } catch (Exception e) {
+                        }
                         coilsPane.getListBoolean().set(i, modbus.ModbusreadCoils(1, dataTreat.coilAddressTransform(coilsPane.getList().get(i).getCoilReadAddressMXY(), coilsPane.getList().get(i).getCoilsReadAddress()), 1));
                     }
                 } catch (Exception e) {

@@ -1,5 +1,6 @@
 package com.TiNg.pane.setting;
 
+import com.TiNg.pane.SettingPane;
 import com.TiNg.pane.coils.CoilSinglePane;
 import com.TiNg.pane.coils.CoilsPane;
 import javafx.collections.FXCollections;
@@ -72,10 +73,11 @@ public class SettingCoilsAddressSinglePane extends AnchorPane {
             @Override
             public void handle(ActionEvent event) {
                 list.get(i).setCoilWriteAddressMXY(choiceBoxWrite.getValue().toString());
-                list.get(i).setCoilReadAddressMXY(choiceBoxRead.getValue().toString());
+                list.get(i).setCoilReadAddressMXY(choiceBoxWrite.getValue().toString());
                 list.get(i).setCoilsWriteAddress(Integer.parseInt(textFieldWrite.getText()));
                 list.get(i).setCoilsReadAddress(Integer.parseInt(textFieldWrite.getText()));
                 textFieldRead.setText(textFieldWrite.getText());
+                SettingPane.messageLabel.setText(label.getText() + "-读写地址已设置为" + choiceBoxWrite.getValue() + textFieldWrite.getText());
             }
         });
 
@@ -84,6 +86,7 @@ public class SettingCoilsAddressSinglePane extends AnchorPane {
             public void handle(ActionEvent event) {
                 list.get(i).setCoilReadAddressMXY(choiceBoxRead.getValue().toString());
                 list.get(i).setCoilsReadAddress(Integer.parseInt(textFieldRead.getText()));
+                SettingPane.messageLabel.setText(label.getText() + "-读取地址已设置为" + choiceBoxRead.getValue() + textFieldRead.getText());
             }
         });
     }

@@ -1,6 +1,7 @@
 package com.TiNg.pane.setting;
 
 import com.TiNg.datatreat.DataTreat;
+import com.TiNg.pane.SettingPane;
 import com.TiNg.pane.registers.RegisterLabelPane;
 import com.TiNg.pane.registers.RegisterSinglePane;
 import com.TiNg.pane.registers.RegistersPane;
@@ -59,6 +60,7 @@ public class SettingRegisterAddressSinglePane extends AnchorPane {
                 list.get(i).setRegisterWriteAddress(Integer.parseInt(textFieldWrite.getText()));
                 list.get(i).setRegisterReadAddress(Integer.parseInt(textFieldWrite.getText()));
                 textFieldRead.setText(textFieldWrite.getText());
+                SettingPane.messageLabel.setText(label.getText() + "-读写地址已设置为" + textFieldWrite.getText());
             }
         });
 
@@ -66,6 +68,7 @@ public class SettingRegisterAddressSinglePane extends AnchorPane {
             @Override
             public void handle(ActionEvent event) {
                 list.get(i).setRegisterReadAddress(Integer.parseInt(textFieldRead.getText()));
+                SettingPane.messageLabel.setText(label.getText() + "-读取地址已设置为" + textFieldRead.getText());
             }
         });
     }

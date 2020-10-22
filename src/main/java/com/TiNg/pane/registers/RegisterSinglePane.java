@@ -2,7 +2,9 @@ package com.TiNg.pane.registers;
 
 import com.TiNg.datatreat.DataTreat;
 import com.TiNg.datatreat.Modbus;
+import com.TiNg.mainLauncher.MainLauncher;
 import com.TiNg.pane.COMConnect;
+import com.TiNg.pane.SettingPane;
 import com.TiNg.windows.FirstWindow;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -14,15 +16,12 @@ import javafx.scene.layout.AnchorPane;
 
 import java.io.*;
 import java.net.URL;
-import java.util.Properties;
 
 public class RegisterSinglePane extends AnchorPane {
 
     FXMLLoader fxmlLoader = new FXMLLoader();
     URL url = fxmlLoader.getClassLoader().getResource("views/registerPaneFXML.fxml");
     AnchorPane anchorPane;  //fxml加载
-
-    Properties properties = DataTreat.properties;
 
     int registerWriteAddress;
     int registerReadAddress;
@@ -59,36 +58,41 @@ public class RegisterSinglePane extends AnchorPane {
         button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if (booleanRegisterDataToMM) {
-                    Double f = Double.parseDouble(textField.getText());
-                    Double f1 = (((f / ((DataTreat.luoju) / 10)) * DataTreat.wulisubi * DataTreat.bujinxifen) / 10);
-                    int a = new Double(f1).intValue();
-                    if (a < 32768) {
-                        modbus.ModbuswriteSingleRegister(1, dataTreat.registerAddressTransform(registerWriteAddress), a);
-                        modbus.ModbuswriteSingleRegister(1, dataTreat.registerAddressTransform(registerWriteAddress) + 1, 0);
-                    } else {
-                        if (a < 65536) {
+                try {
+                    if (booleanRegisterDataToMM) {
+                        Double f = Double.parseDouble(textField.getText());
+                        Double f1 = (((f / ((DataTreat.luoju) / 10)) * DataTreat.wulisubi * DataTreat.bujinxifen) / 10);
+                        int a = new Double(f1).intValue();
+                        if (a < 32768) {
                             modbus.ModbuswriteSingleRegister(1, dataTreat.registerAddressTransform(registerWriteAddress), a);
                             modbus.ModbuswriteSingleRegister(1, dataTreat.registerAddressTransform(registerWriteAddress) + 1, 0);
                         } else {
-                            modbus.ModbuswriteSingleRegister(1, dataTreat.registerAddressTransform(registerWriteAddress), dataTreat.tenToBinary(a)[0]);
-                            modbus.ModbuswriteSingleRegister(1, dataTreat.registerAddressTransform(registerWriteAddress) + 1, dataTreat.tenToBinary(a)[1]);
+                            if (a < 65536) {
+                                modbus.ModbuswriteSingleRegister(1, dataTreat.registerAddressTransform(registerWriteAddress), a);
+                                modbus.ModbuswriteSingleRegister(1, dataTreat.registerAddressTransform(registerWriteAddress) + 1, 0);
+                            } else {
+                                modbus.ModbuswriteSingleRegister(1, dataTreat.registerAddressTransform(registerWriteAddress), dataTreat.tenToBinary(a)[0]);
+                                modbus.ModbuswriteSingleRegister(1, dataTreat.registerAddressTransform(registerWriteAddress) + 1, dataTreat.tenToBinary(a)[1]);
+                            }
                         }
-                    }
-                } else {
-                    int a = Integer.valueOf(textField.getText());
-                    if (a < 32768) {
-                        modbus.ModbuswriteSingleRegister(1, dataTreat.registerAddressTransform(registerWriteAddress), a);
-                        modbus.ModbuswriteSingleRegister(1, dataTreat.registerAddressTransform(registerWriteAddress) + 1, 0);
                     } else {
-                        if (a < 65536) {
+                        int a = Integer.valueOf(textField.getText());
+                        if (a < 32768) {
                             modbus.ModbuswriteSingleRegister(1, dataTreat.registerAddressTransform(registerWriteAddress), a);
                             modbus.ModbuswriteSingleRegister(1, dataTreat.registerAddressTransform(registerWriteAddress) + 1, 0);
                         } else {
-                            modbus.ModbuswriteSingleRegister(1, dataTreat.registerAddressTransform(registerWriteAddress), dataTreat.tenToBinary(a)[0]);
-                            modbus.ModbuswriteSingleRegister(1, dataTreat.registerAddressTransform(registerWriteAddress) + 1, dataTreat.tenToBinary(a)[1]);
+                            if (a < 65536) {
+                                modbus.ModbuswriteSingleRegister(1, dataTreat.registerAddressTransform(registerWriteAddress), a);
+                                modbus.ModbuswriteSingleRegister(1, dataTreat.registerAddressTransform(registerWriteAddress) + 1, 0);
+                            } else {
+                                modbus.ModbuswriteSingleRegister(1, dataTreat.registerAddressTransform(registerWriteAddress), dataTreat.tenToBinary(a)[0]);
+                                modbus.ModbuswriteSingleRegister(1, dataTreat.registerAddressTransform(registerWriteAddress) + 1, dataTreat.tenToBinary(a)[1]);
+                            }
                         }
                     }
+                    SettingPane.messageLabel.setText(labelName.getText() + " : " + "已设置为" + textField.getText());
+                } catch (Exception e) {
+                    SettingPane.messageLabel.setText(labelName.getText() + " : " + "错误");
                 }
             }
         });
