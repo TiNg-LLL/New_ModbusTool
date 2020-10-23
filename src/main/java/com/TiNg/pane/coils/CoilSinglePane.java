@@ -2,6 +2,7 @@ package com.TiNg.pane.coils;
 
 import com.TiNg.datatreat.DataTreat;
 import com.TiNg.datatreat.Modbus;
+import com.TiNg.mainLauncher.MainLauncher;
 import com.TiNg.pane.COMConnect;
 import com.TiNg.pane.SettingPane;
 import com.TiNg.pane.registers.RegistersPane;
@@ -14,6 +15,8 @@ import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class CoilSinglePane extends AnchorPane {
 
@@ -27,6 +30,7 @@ public class CoilSinglePane extends AnchorPane {
     String coilReadAddressMXY;
     Modbus modbus = COMConnect.modbus;
     DataTreat dataTreat = FirstWindow.dataTreat;
+    SimpleDateFormat df = MainLauncher.df;
     Button button;
     int i;  //序号
     Boolean booleanCoilModeTransform;
@@ -60,9 +64,9 @@ public class CoilSinglePane extends AnchorPane {
                             modbus.ModbuswritetrueMultipleCoils(1, dataTreat.coilAddressTransform(coilWriteAddressMXY, coilsWriteAddress));
                         }
                         SettingPane.messageLabel.setText(button.getText());
+                        System.out.println(df.format(new Date()) + " " + button.getText());
                     }
                 } catch (Exception e) {
-                    SettingPane.messageLabel.setText(button.getText() + " : " + "错误");
                 }
             }
         });
@@ -85,9 +89,11 @@ public class CoilSinglePane extends AnchorPane {
                             modbus.ModbuswritetrueMultipleCoils(1, dataTreat.coilAddressTransform(coilWriteAddressMXY, coilsWriteAddress));
                         }
                         SettingPane.messageLabel.setText(button.getText());
+                        System.out.println(df.format(new Date()) + " " + button.getText());
                     }
                 } catch (Exception e) {
                     SettingPane.messageLabel.setText(button.getText() + " : " + "错误");
+                    System.out.println(df.format(new Date()) + " " + button.getText() + " : " + "错误");
                 }
             }
         });

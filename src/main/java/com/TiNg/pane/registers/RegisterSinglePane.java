@@ -16,6 +16,8 @@ import javafx.scene.layout.AnchorPane;
 
 import java.io.*;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class RegisterSinglePane extends AnchorPane {
 
@@ -27,6 +29,7 @@ public class RegisterSinglePane extends AnchorPane {
     int registerReadAddress;
     Modbus modbus = COMConnect.modbus;
     DataTreat dataTreat = FirstWindow.dataTreat;
+    SimpleDateFormat df = MainLauncher.df;
     Label labelName;
     Label label;
     TextField textField;
@@ -91,8 +94,10 @@ public class RegisterSinglePane extends AnchorPane {
                         }
                     }
                     SettingPane.messageLabel.setText(labelName.getText() + " : " + "已设置为" + textField.getText());
+                    System.out.println(df.format(new Date()) + " " + labelName.getText() + " : " + "已设置为" + textField.getText());
                 } catch (Exception e) {
                     SettingPane.messageLabel.setText(labelName.getText() + " : " + "错误");
+                    System.out.println(df.format(new Date()) + " " + labelName.getText() + " : " + "错误");
                 }
             }
         });

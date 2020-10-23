@@ -1,5 +1,6 @@
 package com.TiNg.pane.setting;
 
+import com.TiNg.mainLauncher.MainLauncher;
 import com.TiNg.pane.COMConnect;
 import com.TiNg.pane.SettingPane;
 import com.TiNg.pane.coils.CoilSinglePane;
@@ -17,7 +18,9 @@ import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 public class SettingAdminPasswordPane extends AnchorPane {
@@ -33,6 +36,7 @@ public class SettingAdminPasswordPane extends AnchorPane {
     SettingPane settingPane = FirstWindow.settingPane;
     List<RegisterSinglePane> registersList = RegistersPane.list;
     List<CoilSinglePane> coilsList = CoilsPane.list;
+    SimpleDateFormat df = MainLauncher.df;
 
     int[] i = {0, 1, 2, 3, 4};  //寄存器pane集合中需要权限的下标
     int[] i1 = {8, 9, 10, 11};  //线圈pane集合中需要权限的下标
@@ -86,6 +90,7 @@ public class SettingAdminPasswordPane extends AnchorPane {
     public void adminIn() {
         SettingAdminPasswordWindow settingAdminPasswordWindow = SettingPane.settingAdminPasswordWindow;
         if (String.valueOf(passwordField.getText()).equals("0123")) {
+            System.out.println(df.format(new Date()) + " " + "使用正确密码登入");
             comConnect.getComboBoxBaudrate().setDisable(false);
             comConnect.getComboBoxDataBits().setDisable(false);
             comConnect.getComboBoxStopBits().setDisable(false);
@@ -107,8 +112,11 @@ public class SettingAdminPasswordPane extends AnchorPane {
                 }
             }
             settingAdminPasswordWindow.close();
+        } else {
+            System.out.println(df.format(new Date()) + " " + "使用" + passwordField.getText() + "错误密码尝试登入");
         }
         if (String.valueOf(passwordField.getText()).equals("1")) {
+            System.out.println(df.format(new Date()) + " " + "使用正确密码登入");
             comConnect.getComboBoxBaudrate().setDisable(false);
             comConnect.getComboBoxDataBits().setDisable(false);
             comConnect.getComboBoxStopBits().setDisable(false);
@@ -118,6 +126,7 @@ public class SettingAdminPasswordPane extends AnchorPane {
     }
 
     public void adminOut() {
+        System.out.println(df.format(new Date()) + " " + "登出");
         comConnect.getComboBoxBaudrate().setDisable(true);
         comConnect.getComboBoxDataBits().setDisable(true);
         comConnect.getComboBoxStopBits().setDisable(true);

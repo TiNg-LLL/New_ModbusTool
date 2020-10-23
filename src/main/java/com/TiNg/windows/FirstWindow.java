@@ -26,7 +26,7 @@ public class FirstWindow extends Stage {
     public static DataTreat dataTreat = new DataTreat();
 
     public FirstWindow() {
-        setTitle("New_ModbusTool -ver0.0.0");
+        setTitle("New_ModbusTool -ver1.1.0");
         setWidth(windowWidth);
         setHeight(windowHeight);
         setResizable(false);

@@ -1,5 +1,6 @@
 package com.TiNg.pane.setting;
 
+import com.TiNg.mainLauncher.MainLauncher;
 import com.TiNg.pane.SettingPane;
 import com.TiNg.pane.coils.CoilSinglePane;
 import com.TiNg.pane.coils.CoilsPane;
@@ -16,6 +17,8 @@ import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class SettingCoilsAddressSinglePane extends AnchorPane {
@@ -33,6 +36,7 @@ public class SettingCoilsAddressSinglePane extends AnchorPane {
     Button buttonRead;
     int i;  //序号
     List<CoilSinglePane> list = CoilsPane.list;
+    SimpleDateFormat df = MainLauncher.df;
 
 
     public SettingCoilsAddressSinglePane() {
@@ -78,6 +82,7 @@ public class SettingCoilsAddressSinglePane extends AnchorPane {
                 list.get(i).setCoilsReadAddress(Integer.parseInt(textFieldWrite.getText()));
                 textFieldRead.setText(textFieldWrite.getText());
                 SettingPane.messageLabel.setText(label.getText() + "-读写地址已设置为" + choiceBoxWrite.getValue() + textFieldWrite.getText());
+                System.out.println(df.format(new Date()) + " " + label.getText() + "-读写地址已设置为" + choiceBoxWrite.getValue() + textFieldWrite.getText());
             }
         });
 
@@ -87,6 +92,7 @@ public class SettingCoilsAddressSinglePane extends AnchorPane {
                 list.get(i).setCoilReadAddressMXY(choiceBoxRead.getValue().toString());
                 list.get(i).setCoilsReadAddress(Integer.parseInt(textFieldRead.getText()));
                 SettingPane.messageLabel.setText(label.getText() + "-读取地址已设置为" + choiceBoxRead.getValue() + textFieldRead.getText());
+                System.out.println(df.format(new Date()) + " " + label.getText() + "-读取地址已设置为" + choiceBoxRead.getValue() + textFieldRead.getText());
             }
         });
     }
