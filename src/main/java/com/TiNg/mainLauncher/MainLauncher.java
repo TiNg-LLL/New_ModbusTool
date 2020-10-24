@@ -18,6 +18,10 @@ public class MainLauncher extends Application {
         launch(args);
     }
 
+    public void init() throws Exception {
+        System.out.println(df.format(new Date()) + " " + "程序启动");
+    }
+
 
     public void start(Stage primaryStage) throws Exception {
         firstWindow = new FirstWindow();
@@ -36,7 +40,8 @@ public class MainLauncher extends Application {
 
     @Override
     public void stop() throws Exception {
-        System.out.println(df.format(new Date()) + " " + "主窗口已退出");
+        System.out.println(df.format(new Date()) + " " + "程序退出");
+        System.out.println("-----------------------------------------------------");
         System.exit(0);
     }
 }
