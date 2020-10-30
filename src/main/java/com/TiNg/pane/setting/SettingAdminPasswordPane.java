@@ -91,6 +91,7 @@ public class SettingAdminPasswordPane extends AnchorPane {
         SettingAdminPasswordWindow settingAdminPasswordWindow = SettingPane.settingAdminPasswordWindow;
         if (String.valueOf(passwordField.getText()).equals("0123")) {
             System.out.println(df.format(new Date()) + " " + "使用正确密码登入");
+            SettingPane.messageLabel.setText(" ");
             comConnect.getComboBoxBaudrate().setDisable(false);
             comConnect.getComboBoxDataBits().setDisable(false);
             comConnect.getComboBoxStopBits().setDisable(false);
@@ -112,16 +113,17 @@ public class SettingAdminPasswordPane extends AnchorPane {
                 }
             }
             settingAdminPasswordWindow.close();
-        } else {
-            System.out.println(df.format(new Date()) + " " + "使用" + passwordField.getText() + "错误密码尝试登入");
-        }
-        if (String.valueOf(passwordField.getText()).equals("1")) {
+        } else if (String.valueOf(passwordField.getText()).equals("1")) {
             System.out.println(df.format(new Date()) + " " + "使用正确密码登入");
+            SettingPane.messageLabel.setText(" ");
             comConnect.getComboBoxBaudrate().setDisable(false);
             comConnect.getComboBoxDataBits().setDisable(false);
             comConnect.getComboBoxStopBits().setDisable(false);
             comConnect.getComboBoxEvenODD().setDisable(false);
             settingAdminPasswordWindow.close();
+        } else {
+            System.out.println(df.format(new Date()) + " " + "使用" + passwordField.getText() + "错误密码尝试登入");
+            SettingPane.messageLabel.setText("密码错误");
         }
     }
 

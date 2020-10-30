@@ -20,7 +20,7 @@ import java.util.Properties;
 public class CoilsPane extends FlowPane {
 
     public static List<CoilSinglePane> list = new ArrayList<CoilSinglePane>();  //线圈功能pane集合
-    public static int coilsPaneQuantity = 12;  //线圈功能数量
+    public static int coilsPaneQuantity;  //线圈功能数量
 
     Timeline timeline = new Timeline();
     List<boolean[]> listBoolean = new ArrayList<boolean[]>();
@@ -32,6 +32,7 @@ public class CoilsPane extends FlowPane {
     Properties propertiesAuto = DataTreat.propertiesAuto;
 
     public CoilsPane() {
+        coilsPaneQuantity = Integer.parseInt(properties.getProperty("CoilsPaneQuantity"));
 
         for (int i = 0; i < coilsPaneQuantity; i++) {
             list.add(new CoilSinglePane());

@@ -18,8 +18,12 @@ import java.util.Properties;
 
 public class RegistersPane extends VBox {
 
+    Properties properties = DataTreat.properties;
+    Properties propertiesAuto = DataTreat.propertiesAuto;
+    DataTreat dataTreat = FirstWindow.dataTreat;
+
     public static List<RegisterSinglePane> list = new ArrayList<RegisterSinglePane>();  //寄存器读写功能pane集合
-    public static int registerPaneQuantity = 8;  //寄存器读写功能数量
+    public static int registerPaneQuantity;  //寄存器读写功能数量
 
     public static RegisterLabelPane registerLabelPane = new RegisterLabelPane();  //寄存器只读取功能pane
 
@@ -28,13 +32,8 @@ public class RegistersPane extends VBox {
     Label label;
     Modbus modbus = COMConnect.modbus;
 
-    Properties properties = DataTreat.properties;
-    Properties propertiesAuto = DataTreat.propertiesAuto;
-
-    DataTreat dataTreat = FirstWindow.dataTreat;
-
     public RegistersPane() {
-
+        registerPaneQuantity = Integer.parseInt(properties.getProperty("RegisterPaneQuantity"));
 
         for (int i = 0; i < registerPaneQuantity; i++) {
             list.add(new RegisterSinglePane());
