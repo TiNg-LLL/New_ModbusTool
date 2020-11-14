@@ -1,5 +1,6 @@
 package com.TiNg.pane;
 
+import com.TiNg.mainLauncher.MainLauncher;
 import com.TiNg.pane.coils.CoilSinglePane;
 import com.TiNg.pane.coils.CoilsPane;
 import com.TiNg.pane.registers.RegisterLabelPane;
@@ -18,6 +19,8 @@ import javafx.scene.layout.AnchorPane;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 
@@ -25,6 +28,8 @@ public class SettingPane extends AnchorPane {
     FXMLLoader fxmlLoader = new FXMLLoader();
     URL url = fxmlLoader.getClassLoader().getResource("views/setting/settingPane.fxml");
     AnchorPane anchorPane;  //fxml加载
+
+    SimpleDateFormat df = MainLauncher.df;
 
     List<RegisterSinglePane> registerList = RegistersPane.list;  //寄存器读写功能pane集合
     RegisterLabelPane registerLabelPane = RegistersPane.registerLabelPane;  //寄存器只读取功能pane
@@ -166,14 +171,17 @@ public class SettingPane extends AnchorPane {
 
                 }
                 SettingPane.messageLabel.setText("数据已保存至本地");
+                System.out.println(df.format(new Date()) + " " + "数据已保存至本地");
             }
         });
 
-        adminMenu = menuBar.getMenus().get(3);  //拿到menuBar下的第三个按钮 coilsMenu
+        adminMenu = menuBar.getMenus().get(3);  //拿到menuBar下的第四个按钮 adminMenu
 
-        adminInMenuItem = adminMenu.getItems().get(0);  //拿到addressSaveMenu下的第一个按钮
+        adminInMenuItem = adminMenu.getItems().get(0);  //拿到adminMenu下的第一个按钮
 
-        adminOutMenuItem = adminMenu.getItems().get(1);  //拿到addressSaveMenu下的第二个按钮
+        adminOutMenuItem = adminMenu.getItems().get(1);  //拿到adminMenu下的第二个按钮
+
+        adminOutMenuItem.setDisable(true);
 
         adminInMenuItem.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -201,5 +209,13 @@ public class SettingPane extends AnchorPane {
 
     public Menu getAddressSaveMenu() {
         return addressSaveMenu;
+    }
+
+    public MenuItem getAdminInMenuItem() {
+        return adminInMenuItem;
+    }
+
+    public MenuItem getAdminOutMenuItem() {
+        return adminOutMenuItem;
     }
 }

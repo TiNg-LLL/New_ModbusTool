@@ -101,6 +101,9 @@ public class SettingAdminPasswordPane extends AnchorPane {
             settingPane.getCoilsMenu().setDisable(false);
             settingPane.getAddressSaveMenu().setDisable(false);
 
+            settingPane.getAdminInMenuItem().setDisable(true);
+            settingPane.getAdminOutMenuItem().setDisable(false);
+
 
             for (int j = 0; j < registersList.size(); j++) {
                 if (Arrays.binarySearch(i, registersList.get(j).getI()) >= 0) {
@@ -120,6 +123,7 @@ public class SettingAdminPasswordPane extends AnchorPane {
             comConnect.getComboBoxDataBits().setDisable(false);
             comConnect.getComboBoxStopBits().setDisable(false);
             comConnect.getComboBoxEvenODD().setDisable(false);
+            settingPane.getAdminOutMenuItem().setDisable(false);
             settingAdminPasswordWindow.close();
         } else {
             System.out.println(df.format(new Date()) + " " + "使用" + passwordField.getText() + "错误密码尝试登入");
@@ -137,6 +141,9 @@ public class SettingAdminPasswordPane extends AnchorPane {
         settingPane.getRegisterMenu().setDisable(true);
         settingPane.getCoilsMenu().setDisable(true);
         settingPane.getAddressSaveMenu().setDisable(true);
+
+        settingPane.getAdminInMenuItem().setDisable(false);
+        settingPane.getAdminOutMenuItem().setDisable(true);
 
         for (int j = 0; j < registersList.size(); j++) {
             if (Arrays.binarySearch(i, registersList.get(j).getI()) >= 0) {
